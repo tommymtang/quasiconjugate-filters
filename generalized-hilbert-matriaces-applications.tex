@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+
+% PAGE -----------------------------------------------------------
+\usepackage[autostyle]{csquotes}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\geometry{letterpaper}
+\geometry{margin=1in}
+\usepackage{enumitem}
+%\geometry{landscape}
+
+% PACKAGES -------------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{amsfonts}
+\usepackage{xfrac} %For split-level fractions
+\usepackage{tabu} %For flexible tables
+\usepackage{array} %For complicated arrays
+\usepackage{verbatim} %For \comment environment
+\usepackage{graphicx} %For including graphs
+\usepackage{subcaption}%For displaying multiple images in one row
+\usepackage{listings}%For code blocks
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{tikz}
+
+
+% HEADERS & FOOTERS ----------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} %decorative line
+\lhead{}\chead{}\rhead{\thepage}
+\lfoot{}\cfoot{}\rfoot{}
+
+% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}{Example}[section]
+\numberwithin{equation}{section}
+% ----------------------------------------------------------------
+
+%Just some declaremathoperators
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\BetaDistr}{Beta}
+\DeclareMathOperator{\Bern}{Bern}
+\DeclareMathOperator{\mode}{mode}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\characteristic}{char}
+\begin{document}
+\section{Introduction}
+
+\begin{defn} 
+Let $\mathbb{Z} \ni p \ge 0$. A \emph{generalized Hilbert matrix} is a matrix $H\in M_n(\mathbb{R})$ whose entries are defined: 
+$H_{ij} = \frac{1}{i+j-1+p}$
+\end{defn}
+Our problem is to find $a\in\mathbb{R}^N$ such that 
+\begin{equation}
+a^T H a\end{equation}
+is minimized, where $H$ is a generalized Hilbert matrix (in our case, p=2), subject to the constraint: 
+
+\begin{equation}
+B^T a = \begin{pmatrix} 1 \\ -1\end{pmatrix}
+\end{equation}
+where \[B = \begin{pmatrix} 1 & 0\\ 
+0 & 1 \\
+\vdots & \vdots
+\\ 
+0 & 1 \end{pmatrix} \in M_{N\times 2}(\mathbb{R})\]
+
+Our goal is to prove that such an $a$ has coefficients that alternate in sign. Precisely: 
+
+\begin{thm}
+Let $H$ be a generalized Hilbert matrix of size $N$ and $B \in M_{N\times 2}$ is as above. Furthermore, let 
+\[ \hat{a} = \argmin_{a\in\mathbb{R}^N} \quad \quad a^THa : \quad B^Ta = \begin{pmatrix} 1 \\ -1 \end{pmatrix}\]
+Then for odd $i$, $\hat{a}(i) > 0$ and for even $i$ $\hat{a}(i) < 0$.
+\end{thm} 
+
+We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Our problem amounts to minimizing 
+\[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} (B^Ta - \begin{pmatrix} 1 \\ -1 \end{pmatrix} )\] 
+Taking the derivative with respect to $a$, we see that we must have 
+\[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}\]
+and the constraint of $B^Ta$ results in :
+
+\begin{align*}
+B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}\\
+&\implies \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \frac{1}{}
+\end{align*}
+
+\end{document}
