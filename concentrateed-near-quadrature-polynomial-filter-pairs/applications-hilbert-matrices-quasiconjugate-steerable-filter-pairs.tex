@@ -1,0 +1,111 @@
+%% Copyright 2016 Icm Ltd
+\documentclass[final,3p]{CSP}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathrsfs}  
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{color}
+\usepackage{amsthm}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}{Example}[section]
+\numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{changepage}
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Applications of Generalized Hilbert Matrices for Concentrated, Near Quadrature Polynomial Filter Pairs}
+
+\author[mymainaddress]{Tommy Tang}
+
+\author[mymainaddress,mysecondaryaddress]{Hemant Tagare}
+
+%\author[mysecondaryaddress]{Global Customer Service\corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Corresponding author}
+%\ead{support@Icm.com}
+
+\address[mymainaddress]{300 Cedar Street}
+\address[mysecondaryaddress]{Radiology}
+\begin{keyword}\rm
+\begin{adjustwidth}{2cm}{2cm}{\itshape\textbf{Keyword:}}  
+quadratic programming
+\end{adjustwidth}
+\end{keyword}
+
+\begin{abstract}\rm
+\begin{adjustwidth}{2cm}{2cm}{\itshape\textbf{Abstract:}} 
+The abstract should summarize the contents of the paper and should contain at least 100 and at most 300 words. It should be set in 12-point font size. There should be a space before of 18-point and after of 60-point
+\end{adjustwidth}
+\end{abstract}
+\end{frontmatter}
+
+\section{Introduction}
+\label{}
+\noindent
+It is desirable in the field of optics to be able to construct filters that are near Hilbert transforms of each other. Furthermore, it is often desirable that such filters are angularly-radially separable, with the angular part being polynomial or rational. In particular filters that are steerable give numerous advantages for computation speed. 
+We present a construction of pairs of polynomials that are optimally near-quadrature and prove that such constructions always give positive polynomials. This construction is based largely on the theory of Hilbert and Cauchy matrices. Finally, the same theory gives similar constructions for near-quadrature polynomials of desired concentration near an endpoint, and of tradeoff inequalities between concentration and quadrature. 
+
+\section{The Problem}
+\noindent
+Here we introduce notation and the general setting of the problems to be considered.
+
+\begin{defn}
+Given polynomials $p_e, p_o : [-1,1] \to \mathbb{R}$ with $p_e$ even and $p_o$ odd, we define the \emph{quadrature loss} as: 
+\[q_l(p_e,p_o) = \int_0^1 (p_e(x) - p_o(x))^2 dx\]
+\end{defn}
+
+\begin{defn} Let $p:[-1,1] \to \mathbb{R}$ be a polynomial. Then we define the \emph{concentration}
+ of the polynomial at 1 (or simply, the concentration) to be 
+ \[r(p) = \int_0^1 x^2p(x)^2dx \]
+ It is often more convenient to compute a loss and so we define the concentration loss to be: 
+ \[L_r(p) = \int_0^1 (1-x^2)p(x)^2dx\]
+ \end{defn}
+ 
+ We are interested in minimizing quadrature and concentration loss for a fixed maximal degree $N$ of polynomial allowed. There are fundamental tradeoffs here, and we present specific results given acceptable tradeoffs. \\
+ 
+ In particular, we have definitive results for the straightforward tasks of minimizing quadrature and concentration loss, separately, with the only constraint being that the polynomials are positive on the interval [0,1]. We present these results in succeeding sections. 
+\subsection{Cauchy Matrices}
+
+\section{Results}
+
+\subsection{Quadrature Loss Minimization}
+We are interested in constructing an even polynomial $p_e$ of degree $N$ and an odd polynomial $p_o$ of degree $N-1$ such that $q_l(p_e,p_o)$. Write $p_e = a_N x^N + a_{N-2} x^{N-2} + ... + a_2x^2$ and $p_o = a_{N-1}x^{N-1} + ... + a_1x$. We are thus interested in a vector $a\in\mathbb{R}^n$ such that the pair $p_e, p_o$ constructed from $a$ minimizes $q_l(p_e,p_o)$. 
+
+\begin{thm}
+For $a\in\mathbb{R}^n$, define $p_e, p_o$ as above. Let $\hat{a} = \argmin_{a, \sum a_e = 1} q_l(a)$, with $\hat{a}(j)$ denoting the $j$th coordinate of $a$. Then $\hat{a}(j) \ge 0$ for every $j$ and $\sum a_o = 1$.
+\end{thm}
+\subsection{Concentration Maximization}
+\begin{thm}The maximally concentrated polynomial of degree $N$ is the monomial of degree $N$. For $p_e = x^N$, the polynomial of optimal quadrature with respect to $p_e$ is $p_o(x) = x^{N-1}$. \end{thm}
+
+\begin{prop} Let $q_l(N)$ be the associated minimum quadrature loss to a pair of polynomials of degrees $N, N-1$. Then $q_l(N) \to 0$ as $N\to \infty$. 
+\end{prop}
+\subsection{Quadrature-Concentration Tradeoff}
+\bibliographystyle{bibft}\it
+\bibliography{bibfile}
+
+
+ \appendix
+
+ \section{}
+ \label{}
+Good Lucky
+
+\end{document}
+
+
+

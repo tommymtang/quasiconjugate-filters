@@ -1,0 +1,253 @@
+\documentclass[11pt]{article}
+
+% PAGE -----------------------------------------------------------
+\usepackage[autostyle]{csquotes}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\geometry{letterpaper}
+\geometry{margin=1in}
+\usepackage{enumitem}
+%\geometry{landscape}
+
+% PACKAGES -------------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{amsfonts}
+\usepackage{xfrac} %For split-level fractions
+\usepackage{tabu} %For flexible tables
+\usepackage{array} %For complicated arrays
+\usepackage{verbatim} %For \comment environment
+\usepackage{graphicx} %For including graphs
+\usepackage{subcaption}%For displaying multiple images in one row
+\usepackage{listings}%For code blocks
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{tikz}
+
+
+% HEADERS & FOOTERS ----------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} %decorative line
+\lhead{}\chead{}\rhead{\thepage}
+\lfoot{}\cfoot{}\rfoot{}
+
+% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}{Example}[section]
+\numberwithin{equation}{section}
+% ----------------------------------------------------------------
+
+%Just some declaremathoperators
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\BetaDistr}{Beta}
+\DeclareMathOperator{\Bern}{Bern}
+\DeclareMathOperator{\mode}{mode}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\characteristic}{char}
+\begin{document}
+\section{Introduction}\label{Introduction}
+
+\begin{defn} 
+Let $\mathbb{Z} \ni p \ge 0$. A \emph{generalized Hilbert matrix} is a matrix $H\in M_n(\mathbb{R})$ whose entries are defined: 
+$H_{ij} = \frac{1}{i+j-1+p}$
+\end{defn}
+Our problem is to find $a\in\mathbb{R}^N$ such that 
+\begin{equation}
+a^T H a\end{equation}
+is minimized, where $H$ is a generalized Hilbert matrix (in our case, p=2), subject to the constraint: 
+
+\begin{equation}
+B^T a = \begin{pmatrix} 1 \\ -1\end{pmatrix}
+\end{equation}
+where \[B = \begin{pmatrix} 1 & 0\\ 
+0 & 1 \\
+\vdots & \vdots
+\\ 
+0 & 1 \end{pmatrix} \in M_{N\times 2}(\mathbb{R})\]
+
+Our goal is to prove that such an $a$ has coefficients that alternate in sign. Precisely: 
+
+\begin{thm}\label{positivity-hilbert-coefficients}
+Let $H$ be a generalized Hilbert matrix of size $N$ and $B \in M_{N\times 2}$ is as above. Furthermore, let 
+\[ \hat{a} = \argmin_{a\in\mathbb{R}^N} \quad \quad a^THa : \quad B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix}\]
+Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
+\end{thm} 
+
+We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Our problem amounts to minimizing 
+\[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} )\] 
+Taking the derivative with respect to $a$, we see that we must have 
+\[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}\]
+It will be useful for notation to let $G = H^{-1}$ and establish that $G_{ij}$ (sometimes $G_{i,j}$ when there is ambiguity in the expression) refers to the entry in the $i$th row, $j$th column. Furthermore it will be useful to refer to sums of subsections of rows or columns of $G$. \\
+
+\begin{defn}
+Let $G=H^{-1}$ where $H$ is a generalized Hilbert matrix of size $N$ for constant $p > 0$. Let $G_{i,j}$ denote the entries of $G$ (we write $G_{ij}$ when unambiguous). Furthermore, let 
+
+\begin{align*} 
+g^{oo} = \sum_{i,j=1}^ {N/2}  G_{2i-1, 2j-1} \\
+g^{ee} = \sum_{i,j=1}^ {N/2}  G_{2i, 2j} \\
+g^{oe} = \sum_{i,j=1}^ {N/2}  G_{2i-1, 2j} \\
+g^{eo} = \sum_{i,j=1}^ {N/2}  G_{2i, 2j-1} \\
+\end{align*} be the sums of all entries of $G$ in, for example, odd-indexed rows and odd-indexed columns. Note in particular that since $H$ is symmetric, $G$ is also symmetric and therefore $g^{oe} = g^{eo}$ (when $G$ has even dimension). 
+
+Now, let $1 \le i \le N$. Then define 
+\begin{align*}
+g_i^o= \sum_{j=1}^{N/2} G_{i, 2j-1} \\
+g_i^e= \sum_{j=1}^{N/2} G_{i, 2j} \\
+\end{align*} be the sums of entries of row $i$ in an odd-indexed (resp., even-indexed) column. 
+Finally define 
+\begin{align*}
+g^o = \sum_{i=1}^{N/2} \sum_{j=1}^N G_{2i-1, j}\\
+g^e = \sum_{i=1}^{N/2} \sum_{j=1}^N G_{2i, j}
+\end{align*} be the sum of all entries in odd-indexed or even-indexed rows.
+\end{defn} 
+
+Later we will prove results on the relative magnitudes and signs of the $g^{oo}$, etc., defined above. For now we will simply define the absolute sums $s^{oo} = | g^{oo}|$, etc.\\
+
+The constraint of $B^Ta$ results in :
+
+\begin{align*}
+& B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} -1 \\ 1 \end{pmatrix}\\
+\implies \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} &= \begin{pmatrix} g^{oo} & g^{oe} \\ g^{eo} & g^{ee} \end{pmatrix}^{-1} \begin{pmatrix} -1 \\ 1 \end{pmatrix}\\
+&= \frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}} \begin{pmatrix} -g^{ee} - g^{eo} \\ g^{oe} + g^{oo} \end{pmatrix}\\
+&= \frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}} \begin{pmatrix} -g^e \\ -^o \end{pmatrix}
+\end{align*}
+We will denote the scaling factor $\frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}}$ as $\lambda_G$. 
+
+
+\section{Results} 
+
+Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In this section we show an equivalent result that we will prove, as well as properties of generalized Hilbert matrices that are key elements for the proof. We inherit the notation of Section \ref{Introduction}.
+
+\begin{thm}\label{ratio-of-sums-equivalent-theorem}
+Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
+\begin{equation}\label{ratio-of-sums}
+\frac{s^o}{s^e} < \frac{s_i^o}{s_i^e}
+\end{equation}
+\end{thm}
+
+\begin{prop}\label{ratio-of-sums-is-equivalent-to-positivity-of-coefficients}
+Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied. Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
+\end{prop}
+Before we proceed to the proof, we begin with some key propositions.
+\begin{prop}\label{inverse-hilbert-matrix-entry}
+Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the entries of $G$ are given by 
+\begin{align}\label{entries}
+ G_{ij} &= \frac{(-1)^{i+j}}{p+i+j-1} \left( \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\right) \\
+ &= \label{entries-combinatorial-form} (-1)^{i+j} (p+i+j-1) \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1}^2
+\end{align}
+\end{prop}
+
+\begin{prop}\label{inverse-hilbert-matrix-row}
+Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Fix some $i \in \{1,...,N\}$. Then the sum of the entries of row $i$ is given by: 
+\begin{align}\label{sum-of-row}
+\sum_{j=1}^N G_{ij} &= (-1)^{n+i} \frac{\prod_{k=0}^{N-1} (p+i+k)}{(i-1)! (N-i)!} \\
+&= (-1)^{n+i} i \dbinom{N-1+p+i}{N} \dbinom{N}{i} \label{sum-of-row-combinatorial-form}
+\end{align}
+\end{prop}
+
+\begin{prop}\label{inverse-hilbert-matrix-total} 
+Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the sum of entry of the matrix is given by:
+\begin{equation}\label{total-sum}
+\sum_{i,j=1}^N G_{ij} = n(p+n).
+\end{equation}
+\end{prop} 
+A note on source: The equation \ref{entries} is given in (Collar, "On the Reciprocation of Certain Matrices"). The equations \ref{sum-of-row}, \ref{total-sum} are given in (Smith, "Two Theorems on Inverses of Finite Segments of the Generalized Hilbert Matrix). The alternate expressions \ref{entries-combinatorial-form}, \ref{sum-of-row-combinatorial-form} are easily verified. 
+\begin{prop}\label{absorption-combination}
+Let $N>j>0$. Then 
+\[ j \dbinom{N}{j} = j \dbinom{N}{N-j} = N \dbinom{N-1}{j-1}\]
+\end{prop} 
+
+\begin{prop}\label{subset-of-a-subset-combination}
+\[ \dbinom{N}{m} \dbinom{m}{k} = \dbinom{N}{k} \dbinom{N-k}{m-k} \]
+\end{prop} 
+\bigskip
+
+Both propositions \ref{absorption-combination} and \ref{subset-of-a-subset-combination} are well-known and easily verified. \\
+
+\begin{prop}
+$|g^{oo}| < |g^{oe}|$ and $|g^{eo}| < |g^{ee}|$. Furthermore, for every $k$: $|g_k^o| < |g_k^e|$.
+\end{prop}
+\begin{proof}
+This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilbert-matrix-entry}
+\end{proof}
+
+\begin{cor}
+$g^o < 0$.
+$g^e > 0$.
+\end{cor}
+
+\begin{proof}
+From the previous section we have 
+\[\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \lambda_G \begin{pmatrix} -g^e \\ g^o \end{pmatrix}.\]
+Now since $B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}$, the $k$th element of $a$ is given by 
+\begin{equation}\label{ratio-linear-combination} \lambda_1 g_k^o + \lambda_2 g_k^e \end{equation}
+
+Now, suppose $k$ is odd. Expression \ref{ratio-linear-combination} is negative if \begin{align*}
+&\lambda_1 g_k^o + \lambda_2 g_k^e < 0\\
+\iff & \lambda_G(-g^e g_k^o + g^o g_k^e) < 0 \\
+\iff & g^eg_k^o > g^og_k^e\\
+\iff & \frac{g_k^o}{g_k^e} < \frac{g^o}{g^e}
+\end{align*} where we take care to note that $g_k^e$ is negative when $k$ is odd. On the other hand, if $k$ is even we need
+\begin{align*}
+&\lambda_1 g_k^o + \lambda_2 g_k^e > 0\\
+\iff & \lambda_G(-g^e g_k^o + g^o g_k^e) > 0 \\
+\iff & g^og_k^e > g^eg_k^o\\
+\iff & \frac{g^o}{g^e} > \frac{g^o_k}{g^e_k}
+\end{align*} as before, where here we used the fact that both $g^e$ and $g^e_k$ are positive. Note that we have used $\lambda_G > 0$ without proof. Now, regardless of parity, on either side of the inequality we have one term in the fraction negative. We must always have one of $g^o_k, g^e_k$ negative, and $g^o$ is always negative, so taking absolute values of all terms, we are multiplying both side by negative 1 and thus obtain: 
+\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}\]
+\end{proof}
+
+Essentially, Proposition \ref{ratio-of-sums-is-equivalent-to-positivity-of-coefficients} states that Theorem \ref{ratio-of-sums-equivalent-theorem} our main Theorem \ref{positivity-hilbert-coefficients}.
+
+\begin{thm}\label{ratio-of-absolute-difference-theorem}
+Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, g_i^o, s^o, etc.$ as previously. Furthermore, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_i^+ = s_i^o + s_i^e$ and $s_i^- = s_i^e- s_i^o$. Then:
+
+\begin{equation}\label{ratio-of-absolute-difference-inequality}
+\frac{s^+}{s^-} < \frac{s_i^+}{s_i^-}
+\end{equation}
+\end{thm} Furthermore, Theorem \ref{ratio-of-absolute-difference-theorem} is equivalent to Theorem \ref{ratio-of-sums-equivalent-theorem}. We choose to work with this ratio as opposed to the one in \ref{ratio-of-sums} because the differences between the two are magnified, giving us a larger room for error. The manipulations to achieve the inequality are thus more conveniently derived. 
+
+Note that in our expressions for the individual entries or sums of rows of $G$, there is usually a term like $(-1)^{i+j}$ dictating the sign of the value. Since we wish to compare a ratio of sums after taking an absolute value, we can in fact ignore the sign term. Thus plugging in our values from our propositions into the inequality \ref{ratio-of-absolute-difference-inequality}, we see that our inequality is equivalent to 
+
+\begin{equation}\label{inequality-all-expressions}
+\frac{\sum_{i=1}^N i \dbinom{N-1+p+i}{N} \dbinom{N}{i}}{N(P+N)} < \frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1}^2 }{k \dbinom{N-1+p+k}{N}\dbinom{N}{k}} 
+\end{equation}  for every $k\in \{ 1,...,N\}$.\\
+
+Let us first consider the LHS. Using Proposition \ref{absorption-combination}, we see that 
+\begin{align}
+\frac{\sum_{i=1}^N i \dbinom{N-1+p+i}{N} \dbinom{N}{i}}{N(P+N)}  &= \frac{\sum_{i=1}^N N \dbinom{N-1+p+i}{N}  \dbinom{N-1}{i-1}}{N(P+N)} \\
+&= \frac{\dbinom{N-1+p+i}{N}  \dbinom{N-1}{i-1}}{P+N} \\
+&< \frac{\dbinom{N-1+p+i}{N}  \dbinom{N}{i}}{P+N} \label{LHS-upper-bound}
+\end{align}
+
+Now consider the RHS. The denominator can be rewritten as 
+\begin{align*} 
+k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\ 
+&= (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} 
+\end{align*} and plugging into the RHS and expanding gives 
+\begin{align*}
+&\frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1}^2 }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
+&= \frac{ (N+p+k-1)\sum_{j=1}^N  \dbinom{N+p+k-2}{p+k+j-2} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1}^2 }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
+&= \frac{\sum_{j=1}^N \frac{(N+p+k-2)!}{(p+k+j-2)!(N-j)!} \frac{(N+p+j-1)!}{(N-k)! (p+j+k-1)!} \left(\frac{(p+k+j-2)!}{(k-1)! (p+j-1)!}\right)^2}{\frac{(N+p+k-2)!}{(N-1)! (p+k-1)!} \frac{(N-1)!}{(k-1)! (N-k)!}}
+\\
+&= (p+k-1)
+\end{align*}
+\end{document}
