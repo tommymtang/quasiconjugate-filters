@@ -64,7 +64,40 @@
 \DeclareMathOperator{\characteristic}{char}
 \begin{document}
 \section{Introduction}\label{Introduction}
+We are often interested in pairs of filters $f_e, f_o: \mathbb{R}^3 \to \mathbb{R}$,  such that $f_e$ is even, $f_o$ is odd, both are steerable and separable in the radial and angular component, and are positive quasi-conjugates of each other. That is, we would like the behavior of $f_o$, on, say, the upper half-sphere to resemble the behavior of $f_e$ on the same domain, and both to be positive on that domain. \\
 
+It is known that $f_e$ and $f_o$ are exactly steerable with respect to the rotational group if the angular components are polynomials of the angle. However, this ensures that they will not be exactly conjugate to each other. It is possible, however, to demand that they be as approximately conjugate to each other as possible for a certain fixed maximum degree. \\ 
+
+Let $p_e, p_o$ be the corresponding polynomials for the angular parts of $f_e, f_o$, respectively. Then our problem amounts to minimizing $\int (p_e(\theta) - p_o(\theta))^2d\theta$ as theta varies over the upper half sphere. With the same requirement that this maximization takes place normalized so that the values at the poles are 1, and 0 at the equator, we obtain the result that such a maximization always results in positive polynomials. In particular, such optimal polynomials also contain only positive coefficients. \\
+
+In the succeeding propositions, we define this more precisely and subsequently, show that these properties are closely related to the properties of the generalized Hilbert matrix. 
+
+\subsection{The Problem}
+We are interested in quasicongjuate, radial-angular separable, exactly steerable functions of $\mathbb{R}^3$. That is, we consider functions of the type $f_e = W(r)p_e(\cos \theta)$ and $f_o = W(r)p_o(\cos \theta)$ where $p_e, p_o$ are axially symmetric about the north pole and positive and approximately identical on the upper half sphere. \\
+
+We can think of $p_e, p_o$ as functions of $K/G/K$ where $G=SO(3)$ and $K$ is an embedding of $SO(2)$. In particular, they are functions of the altitude on the sphere and we can thus consider them as functions of $\cos \theta$. When $p_e, p_o$ are polynomials, the functions $f_e, f_o$ are steerable with respect to $SO(3)$ and moreover the steering coefficients and closed forms of integrals over a shell are well-known. \\
+
+We desire that both $p_e$ and $p_o$ are zero at the equator and 1 at the poles and are positive. Other desirable qualities (that we do not precisely demand) are monotonicity and concentration.\\
+
+Fix some even integer $N$. We will require $\deg p_e \le N$. For quasi-conjugacy we seek to minimize: 
+\begin{align*}
+&\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 d\theta\\
+&= \int_0^1 (p_e(z) - p_o(z))^2 dz
+\end{align*}
+
+Let $p(z) = a_Nz^N + a_{N-1}z^{N-1} + ... + a_0 = p_e(z) - p_o(z)$. Note that the coefficients of $p$ correspond in a straightforward way to $p_e$, $p_o$, with the mere modification of sign in $p_o$. We require $p(0) = 0$, $p(1) = 1$. Write $a\in \mathbb{R}^N$ with $a(i) = a_i$ in $p$. Then our problem can be rewritten as: 
+
+\begin{align*}
+& \argmin_{a\in\mathbb{R}^N} \int_0^1 p(z)^2 dz \\
+&=\argmin_{a\in\mathbb{R}^N} \int_0^1 \sum_{i,j=1}^N a_ia_j z^{i+j} dz \\
+&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \int_0^1 z^{i+j} dz\\
+&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \frac{1}{i+j+1} dz\\
+&= \argmin_{a\in\mathbb{R}^N} a^T H a
+\end{align*} where $H_{ij} = \frac{1}{i+j+1}$. \\
+
+We will in fact prove that such a solution $a$ is always alternating in sign so that the corresponding $p_e, p_o$ have only positive coefficients (and thus are in fact positive and monotone). To do so, we will need some theory on the generalized Hilbert matrix. 
+
+\section{Formulation as Generalized Hilbert Matrix Problem}
 \begin{defn} 
 Let $\mathbb{Z} \ni p \ge 0$. A \emph{generalized Hilbert matrix} is a matrix $H\in M_n(\mathbb{R})$ whose entries are defined: 
 $H_{ij} = \frac{1}{i+j-1+p}$
@@ -72,10 +105,10 @@ $H_{ij} = \frac{1}{i+j-1+p}$
 Our problem is to find $a\in\mathbb{R}^N$ such that 
 \begin{equation}
 a^T H a\end{equation}
-is minimized, where $H$ is a generalized Hilbert matrix (in our case, p=2), subject to the constraint: 
+is minimized, where $H$ is a generalized Hilbert matrix (in our case, p=2,4), subject to the constraint: 
 
 \begin{equation}
-B^T a = \begin{pmatrix} 1 \\ -1\end{pmatrix}
+B^T a = \begin{pmatrix} -1 \\ 1\end{pmatrix}
 \end{equation}
 where \[B = \begin{pmatrix} 1 & 0\\ 
 0 & 1 \\
@@ -94,8 +127,13 @@ Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
 We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Our problem amounts to minimizing 
 \[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} )\] 
 Taking the derivative with respect to $a$, we see that we must have 
-\[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}\]
-It will be useful for notation to let $G = H^{-1}$ and establish that $G_{ij}$ (sometimes $G_{i,j}$ when there is ambiguity in the expression) refers to the entry in the $i$th row, $j$th column. Furthermore it will be useful to refer to sums of subsections of rows or columns of $G$. \\
+\[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
+under the constraint 
+\begin{align*}
+&B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix} \\
+\iff &B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} -1 \\ 1 \end{pmatrix}
+\end{align*}\bigskip
+It will be useful now to establish additional notation. Write $G = H^{-1}$ and let $G_{ij}$ (sometimes $G_{i,j}$ when there is ambiguity in the expression) refers to the entry in the $i$th row, $j$th column. Furthermore it will be useful to refer to sums of subsections of rows or columns of $G$. \\
 
 \begin{defn}
 Let $G=H^{-1}$ where $H$ is a generalized Hilbert matrix of size $N$ for constant $p > 0$. Let $G_{i,j}$ denote the entries of $G$ (we write $G_{ij}$ when unambiguous). Furthermore, let 
@@ -121,37 +159,24 @@ g^e = \sum_{i=1}^{N/2} \sum_{j=1}^N G_{2i, j}
 
 Later we will prove results on the relative magnitudes and signs of the $g^{oo}$, etc., defined above. For now we will simply define the absolute sums $s^{oo} = | g^{oo}|$, etc.\\
 
-The constraint of $B^Ta$ results in :
+We can thus rewrite the constraint of $B^Ta$ earlier as:
 
 \begin{align*}
 & B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} -1 \\ 1 \end{pmatrix}\\
 \implies \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} &= \begin{pmatrix} g^{oo} & g^{oe} \\ g^{eo} & g^{ee} \end{pmatrix}^{-1} \begin{pmatrix} -1 \\ 1 \end{pmatrix}\\
 &= \frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}} \begin{pmatrix} -g^{ee} - g^{eo} \\ g^{oe} + g^{oo} \end{pmatrix}\\
-&= \frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}} \begin{pmatrix} -g^e \\ -^o \end{pmatrix}
+&= \frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}} \begin{pmatrix} -g^e \\ g^o \end{pmatrix}
 \end{align*}
 We will denote the scaling factor $\frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}}$ as $\lambda_G$. 
 
+\section{Properties of the Inverse Generalized Hilbert Matrix}
+It is clear now that to prove Theorem \ref{positivity-hilbert-coefficients}, we will need to study the inverse of the generalized Hilbert matrix. We inherit the notation from the previous section \ref{Introduction}. 
 
-\section{Results} 
-
-Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In this section we show an equivalent result that we will prove, as well as properties of generalized Hilbert matrices that are key elements for the proof. We inherit the notation of Section \ref{Introduction}.
-
-\begin{thm}\label{ratio-of-sums-equivalent-theorem}
-Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
-\begin{equation}\label{ratio-of-sums}
-\frac{s^o}{s^e} < \frac{s_i^o}{s_i^e}
-\end{equation}
-\end{thm}
-
-\begin{prop}\label{ratio-of-sums-is-equivalent-to-positivity-of-coefficients}
-Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied. Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
-\end{prop}
-Before we proceed to the proof, we begin with some key propositions.
 \begin{prop}\label{inverse-hilbert-matrix-entry}
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the entries of $G$ are given by 
 \begin{align}\label{entries}
  G_{ij} &= \frac{(-1)^{i+j}}{p+i+j-1} \left( \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\right) \\
- &= \label{entries-combinatorial-form} (-1)^{i+j} (p+i+j-1) \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1}^2
+ &= \label{entries-combinatorial-form} (-1)^{i+j} (p+i+j-1) \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
 \end{align}
 \end{prop}
 
@@ -170,21 +195,10 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 \end{equation}
 \end{prop} 
 A note on source: The equation \ref{entries} is given in (Collar, "On the Reciprocation of Certain Matrices"). The equations \ref{sum-of-row}, \ref{total-sum} are given in (Smith, "Two Theorems on Inverses of Finite Segments of the Generalized Hilbert Matrix). The alternate expressions \ref{entries-combinatorial-form}, \ref{sum-of-row-combinatorial-form} are easily verified. 
-\begin{prop}\label{absorption-combination}
-Let $N>j>0$. Then 
-\[ j \dbinom{N}{j} = j \dbinom{N}{N-j} = N \dbinom{N-1}{j-1}\]
-\end{prop} 
 
-\begin{prop}\label{subset-of-a-subset-combination}
-\[ \dbinom{N}{m} \dbinom{m}{k} = \dbinom{N}{k} \dbinom{N-k}{m-k} \]
-\end{prop} 
-\bigskip
-
-Both propositions \ref{absorption-combination} and \ref{subset-of-a-subset-combination} are well-known and easily verified. \\
-
-\begin{prop}
+\begin{cor}
 $|g^{oo}| < |g^{oe}|$ and $|g^{eo}| < |g^{ee}|$. Furthermore, for every $k$: $|g_k^o| < |g_k^e|$.
-\end{prop}
+\end{cor}
 \begin{proof}
 This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilbert-matrix-entry}
 \end{proof}
@@ -193,6 +207,21 @@ This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilb
 $g^o < 0$.
 $g^e > 0$.
 \end{cor}
+\section{Proof} 
+
+Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In this section we show an equivalent result that we will prove, as well as properties of generalized Hilbert matrices that are key elements for the proof. We inherit the notation of Section \ref{Introduction}.
+
+\begin{thm}\label{ratio-of-sums-equivalent-theorem}
+Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
+\begin{equation}\label{ratio-of-sums}
+\frac{s^o}{s^e} < \frac{s_i^o}{s_i^e}
+\end{equation}
+\end{thm}
+
+\begin{prop}\label{ratio-of-sums-is-equivalent-to-positivity-of-coefficients}
+Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied. Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
+\end{prop}
+
 
 \begin{proof}
 From the previous section we have 
@@ -221,9 +250,31 @@ Essentially, Proposition \ref{ratio-of-sums-is-equivalent-to-positivity-of-coeff
 Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, g_i^o, s^o, etc.$ as previously. Furthermore, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_i^+ = s_i^o + s_i^e$ and $s_i^- = s_i^e- s_i^o$. Then:
 
 \begin{equation}\label{ratio-of-absolute-difference-inequality}
-\frac{s^+}{s^-} < \frac{s_i^+}{s_i^-}
-\end{equation}
-\end{thm} Furthermore, Theorem \ref{ratio-of-absolute-difference-theorem} is equivalent to Theorem \ref{ratio-of-sums-equivalent-theorem}. We choose to work with this ratio as opposed to the one in \ref{ratio-of-sums} because the differences between the two are magnified, giving us a larger room for error. The manipulations to achieve the inequality are thus more conveniently derived. 
+\frac{s^+}{s^-} < \frac{s_i^+}{s_i^-} 
+\end{equation} Furthermore, this is equivalent to 
+\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}. \]
+\end{thm}  We choose to work with this ratio as opposed to the one in \ref{ratio-of-sums} because the differences between the two are magnified, giving us a larger room for error. The manipulations to achieve the inequality are thus more conveniently derived. 
+\begin{proof}
+We first prove equivalence of the theorems. Note 
+\begin{align*}
+&\frac{s^o}{s^e} < \frac{s^o_k}{s^e_k} \\
+\iff & \frac{s^+ - s^-}{s^+ +s^-} <\frac{s^+_k - s^-_k}{s^+_k +s^-_k} \\
+\iff& \frac{1-s^-/s^+}{1+s^-/s^+} < \frac{1-s^-_k /s^+_k}{1+s^-_k/s^+_k} \\
+\iff & \frac{s^-}{s^+} > \frac{s^-_k}{s^+_k}\\
+\iff & \frac{s^+}{s^-} < \frac{s_i^+}{s_i^-}
+\end{align*} where we have taken advantage of the fact that $0<\frac{s^-}{s^+}, \frac{s^-_k}{s^+_k}<1$.
+
+Now onto the inequality. We write down two lemmas on binomial coefficients that will prove useful. Both are well-known and easily verified.
+\begin{lem}\label{absorption-combination}
+Let $N>j>0$. Then 
+\[ j \dbinom{N}{j} = j \dbinom{N}{N-j} = N \dbinom{N-1}{j-1}\]
+\end{lem} 
+
+\begin{lem}\label{subset-of-a-subset-combination}
+\[ \dbinom{N}{m} \dbinom{m}{k} = \dbinom{N}{k} \dbinom{N-k}{m-k} \]
+\end{lem} 
+\bigskip
+
 
 Note that in our expressions for the individual entries or sums of rows of $G$, there is usually a term like $(-1)^{i+j}$ dictating the sign of the value. Since we wish to compare a ratio of sums after taking an absolute value, we can in fact ignore the sign term. Thus plugging in our values from our propositions into the inequality \ref{ratio-of-absolute-difference-inequality}, we see that our inequality is equivalent to 
 
@@ -234,8 +285,8 @@ Note that in our expressions for the individual entries or sums of rows of $G$, 
 Let us first consider the LHS. Using Proposition \ref{absorption-combination}, we see that 
 \begin{align}
 \frac{\sum_{i=1}^N i \dbinom{N-1+p+i}{N} \dbinom{N}{i}}{N(P+N)}  &= \frac{\sum_{i=1}^N N \dbinom{N-1+p+i}{N}  \dbinom{N-1}{i-1}}{N(P+N)} \\
-&= \frac{\dbinom{N-1+p+i}{N}  \dbinom{N-1}{i-1}}{P+N} \\
-&< \frac{\dbinom{N-1+p+i}{N}  \dbinom{N}{i}}{P+N} \label{LHS-upper-bound}
+&= \frac{\sum_{i=1}^N\dbinom{N-1+p+i}{N}  \dbinom{N-1}{i-1}}{P+N} \\
+&< \frac{\sum_{i=1}^N\dbinom{N-1+p+i}{N}  \dbinom{N}{i}}{P+N} \label{LHS-upper-bound}
 \end{align}
 
 Now consider the RHS. The denominator can be rewritten as 
@@ -244,10 +295,16 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 &= (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} 
 \end{align*} and plugging into the RHS and expanding gives 
 \begin{align*}
-&\frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1}^2 }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
-&= \frac{ (N+p+k-1)\sum_{j=1}^N  \dbinom{N+p+k-2}{p+k+j-2} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1}^2 }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
-&= \frac{\sum_{j=1}^N \frac{(N+p+k-2)!}{(p+k+j-2)!(N-j)!} \frac{(N+p+j-1)!}{(N-k)! (p+j+k-1)!} \left(\frac{(p+k+j-2)!}{(k-1)! (p+j-1)!}\right)^2}{\frac{(N+p+k-2)!}{(N-1)! (p+k-1)!} \frac{(N-1)!}{(k-1)! (N-k)!}}
+&\frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{i-1} \dbinom{p+k+j-2}{j-1} }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
+&= \frac{ (N+p+k-1)\sum_{j=1}^N  \dbinom{N+p+k-2}{p+k+j-2} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1} \dbinom{p+k+j-2}{j-1} }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
+&= \frac{\sum_{j=1}^N \frac{(N+p+k-2)!}{(p+k+j-2)!(N-j)!} \frac{(N+p+j-1)!}{(N-k)! (p+j+k-1)!} \left(\frac{(p+k+j-2)!^2}{(k-1)! (p+j-1)!(j-1)!(p+k-1)!}\right)}{\frac{(N+p+k-2)!}{(N-1)! (p+k-1)!} \frac{(N-1)!}{(k-1)! (N-k)!}}
 \\
-&= (p+k-1)
-\end{align*}
+&= \sum_{j=1}^N \frac{(N+p+j-1)! (p+k+j-2)!}{(N-j)!(p+j+k-1)!(p+j-1)!(j-1)!}\\
+&= \sum_{j=1}^N \frac{(N+p+j-1)!N! j}{(p+j-1)!N!(N-j)!j! (p+j+k-1)}\\
+&= \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j} \frac{j}{p+j+k-1}
+\end{align*} which is clearly monotonically decreasing in $k$, so it suffices to consider 
+\begin{align*}
+\sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j} \frac{j}{p+j+N-1} > \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j}\frac{1}{p+N}
+\end{align*} since the fraction $\frac{j}{p+j+N-1}$ is increasing in $j$ because both $j$ and $p+N-1$ positive.
+\end{proof}
 \end{document}
