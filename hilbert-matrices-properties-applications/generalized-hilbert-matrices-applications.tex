@@ -73,7 +73,7 @@ Let $p_e, p_o$ be the corresponding polynomials for the angular parts of $f_e, f
 In the succeeding propositions, we define this more precisely and subsequently, show that these properties are closely related to the properties of the generalized Hilbert matrix. 
 
 \subsection{The Problem}
-We are interested in quasicongjuate, radial-angular separable, exactly steerable functions of $\mathbb{R}^3$. That is, we consider functions of the type $f_e = W(r)p_e(\cos \theta)$ and $f_o = W(r)p_o(\cos \theta)$ where $p_e, p_o$ are axially symmetric about the north pole and positive and approximately identical on the upper half sphere. \\
+We are interested in quasiconjugate, radial-angular separable, exactly steerable functions of $\mathbb{R}^3$. That is, we consider functions of the type $f_e = W(r)p_e(\cos \theta)$ and $f_o = W(r)p_o(\cos \theta)$ where $p_e, p_o$ are axially symmetric about the north pole and positive and approximately identical on the upper half sphere. \\
 
 We can think of $p_e, p_o$ as functions of $K/G/K$ where $G=SO(3)$ and $K$ is an embedding of $SO(2)$. In particular, they are functions of the altitude on the sphere and we can thus consider them as functions of $\cos \theta$. When $p_e, p_o$ are polynomials, the functions $f_e, f_o$ are steerable with respect to $SO(3)$ and moreover the steering coefficients and closed forms of integrals over a shell are well-known. \\
 
@@ -81,23 +81,23 @@ We desire that both $p_e$ and $p_o$ are zero at the equator and 1 at the poles a
 
 Fix some even integer $N$. We will require $\deg p_e \le N$. For quasi-conjugacy we seek to minimize: 
 \begin{align*}
-&\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 d\theta\\
+&\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 \sin\theta d\theta\\
 &= \int_0^1 (p_e(z) - p_o(z))^2 dz
 \end{align*}
 
 Let $p(z) = a_Nz^N + a_{N-1}z^{N-1} + ... + a_0 = p_e(z) - p_o(z)$. Note that the coefficients of $p$ correspond in a straightforward way to $p_e$, $p_o$, with the mere modification of sign in $p_o$. We require $p(0) = 0$, $p(1) = 1$. Write $a\in \mathbb{R}^N$ with $a(i) = a_i$ in $p$. Then our problem can be rewritten as: 
 
 \begin{align*}
-& \argmin_{a\in\mathbb{R}^N} \int_0^1 p(z)^2 dz \\
-&=\argmin_{a\in\mathbb{R}^N} \int_0^1 \sum_{i,j=1}^N a_ia_j z^{i+j} dz \\
-&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \int_0^1 z^{i+j} dz\\
-&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \frac{1}{i+j+1} dz\\
-&= \argmin_{a\in\mathbb{R}^N} a^T H a
+& \argmin_{a\in\mathbb{R}^N p(0)=0,p(1)=1} \int_0^1 p(z)^2 dz, \qquad p(0)=0, p(1)=1 \\
+&=\argmin_{a\in\mathbb{R}^N} \int_0^1 \sum_{i,j=1}^N a_ia_j z^{i+j} dz, \qquad p(0)=0, p(1)=1\\
+&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \int_0^1 z^{i+j} dz, \qquad p(0)=0, p(1)=1\\
+&= \argmin_{a\in\mathbb{R}^N} \sum_{i,j=1}^N a_ia_j \frac{1}{i+j+1} dz, \qquad p(0)=0, p(1)=1\\
+&= \argmin_{a\in\mathbb{R}^N} a^T H a, \qquad p(0)=0, p(1)=1
 \end{align*} where $H_{ij} = \frac{1}{i+j+1}$. \\
 
 We will in fact prove that such a solution $a$ is always alternating in sign so that the corresponding $p_e, p_o$ have only positive coefficients (and thus are in fact positive and monotone). To do so, we will need some theory on the generalized Hilbert matrix. 
 
-\section{Formulation as Generalized Hilbert Matrix Problem}
+\section{Formulation as Generalized Hilbert Matrix Problem}\label{formulationa-hilbert}
 \begin{defn} 
 Let $\mathbb{Z} \ni p \ge 0$. A \emph{generalized Hilbert matrix} is a matrix $H\in M_n(\mathbb{R})$ whose entries are defined: 
 $H_{ij} = \frac{1}{i+j-1+p}$
@@ -125,7 +125,7 @@ Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
 \end{thm} 
 
 We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Our problem amounts to minimizing 
-\[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} )\] 
+\[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}^T (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} )\] 
 Taking the derivative with respect to $a$, we see that we must have 
 \[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
 under the constraint 
@@ -169,7 +169,7 @@ We can thus rewrite the constraint of $B^Ta$ earlier as:
 \end{align*}
 We will denote the scaling factor $\frac{1}{g^{oo} g^{ee} - g^{oe}g^{eo}}$ as $\lambda_G$. 
 
-\section{Properties of the Inverse Generalized Hilbert Matrix}
+\section{Properties of the Inverse Generalized Hilbert Matrix}\label{hilbert-matrix-properties}
 It is clear now that to prove Theorem \ref{positivity-hilbert-coefficients}, we will need to study the inverse of the generalized Hilbert matrix. We inherit the notation from the previous section \ref{Introduction}. 
 
 \begin{prop}\label{inverse-hilbert-matrix-entry}
@@ -197,29 +197,36 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 A note on source: The equation \ref{entries} is given in (Collar, "On the Reciprocation of Certain Matrices"). The equations \ref{sum-of-row}, \ref{total-sum} are given in (Smith, "Two Theorems on Inverses of Finite Segments of the Generalized Hilbert Matrix). The alternate expressions \ref{entries-combinatorial-form}, \ref{sum-of-row-combinatorial-form} are easily verified. 
 
 \begin{cor}
-$|g^{oo}| < |g^{oe}|$ and $|g^{eo}| < |g^{ee}|$. Furthermore, for every $k$: $|g_k^o| < |g_k^e|$.
+Let $N$ be even. Then for every $k$,  $|g_k^o| < |g_k^e|$. Furthermore $|g^{oo}| < |g^{oe}|$ and $|g^{eo}| < |g^{ee}|$.  If $N$ is odd then the inequalities are reversed. 
 \end{cor}
 \begin{proof}
 This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilbert-matrix-entry}
 \end{proof}
 
 \begin{cor}
-$g^o < 0$.
-$g^e > 0$.
+Let $N$ be even. Then $g^o < 0 < g^e$. If $N$ is odd then the inequalities are reversed.
 \end{cor}
+
+\begin{prop}\label{inverse-determinant-is-positive}
+$\lambda_G$ as defined earlier is positive.
+\end{prop}
+\begin{proof}
+First, note that $H$ is positive definite, and therefore $G=H^{-1}$ is positive definite. Thus, for any $x= \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \in \mathbb{R}^2$, $x^T B^TGBx = (x_1 x_2 \cdots x_2) G \begin{pmatrix} x_1 \\ x_2 \\ \vdots x_2 \end{pmatrix} > 0$ when $x$ is not identically zero. (More to the point, $B$ has full column rank). \\
+Thus $B^TGB \in M_2(\mathbb{R})$ with positive determinant. Since $\lambda_G = \frac{1}{\det BT^GB} >0 $ as needed.
+\end{proof}
 \section{Proof} 
 
 Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In this section we show an equivalent result that we will prove, as well as properties of generalized Hilbert matrices that are key elements for the proof. We inherit the notation of Section \ref{Introduction}.
 
 \begin{thm}\label{ratio-of-sums-equivalent-theorem}
-Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
+Let $G=H^{-1}$ be the inverse of a Hilbert matrix of dimension $N$ even, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
 \begin{equation}\label{ratio-of-sums}
 \frac{s^o}{s^e} < \frac{s_i^o}{s_i^e}
-\end{equation}
+\end{equation} If $N$ is odd, then the inequality is reversed. 
 \end{thm}
 
 \begin{prop}\label{ratio-of-sums-is-equivalent-to-positivity-of-coefficients}
-Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied. Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
+Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied (or if $N$ is odd, then the reversed inequality). Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
 \end{prop}
 
 
@@ -229,7 +236,7 @@ From the previous section we have
 Now since $B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}$, the $k$th element of $a$ is given by 
 \begin{equation}\label{ratio-linear-combination} \lambda_1 g_k^o + \lambda_2 g_k^e \end{equation}
 
-Now, suppose $k$ is odd. Expression \ref{ratio-linear-combination} is negative if \begin{align*}
+First, suppose $N$ is even and consider odd $k$. Expression \ref{ratio-linear-combination} is negative if \begin{align*}
 &\lambda_1 g_k^o + \lambda_2 g_k^e < 0\\
 \iff & \lambda_G(-g^e g_k^o + g^o g_k^e) < 0 \\
 \iff & g^eg_k^o > g^og_k^e\\
@@ -240,22 +247,23 @@ Now, suppose $k$ is odd. Expression \ref{ratio-linear-combination} is negative i
 \iff & \lambda_G(-g^e g_k^o + g^o g_k^e) > 0 \\
 \iff & g^og_k^e > g^eg_k^o\\
 \iff & \frac{g^o}{g^e} > \frac{g^o_k}{g^e_k}
-\end{align*} as before, where here we used the fact that both $g^e$ and $g^e_k$ are positive. Note that we have used $\lambda_G > 0$ without proof. Now, regardless of parity, on either side of the inequality we have one term in the fraction negative. We must always have one of $g^o_k, g^e_k$ negative, and $g^o$ is always negative, so taking absolute values of all terms, we are multiplying both side by negative 1 and thus obtain: 
+\end{align*} as before, where here we used the fact that both $g^e$ and $g^e_k$ are positive.  Now, regardless of parity, on either side of the inequality we have one term in the fraction negative. We must always have one of $g^o_k, g^e_k$ negative, and $g^o$ is always negative, so taking absolute values of all terms, we are multiplying both side by negative 1 and thus obtain: 
 \[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}\]
 \end{proof}
 
 Essentially, Proposition \ref{ratio-of-sums-is-equivalent-to-positivity-of-coefficients} states that Theorem \ref{ratio-of-sums-equivalent-theorem} our main Theorem \ref{positivity-hilbert-coefficients}.
 
 \begin{thm}\label{ratio-of-absolute-difference-theorem}
-Let $G=H^{-1}$ be the inverse of a Hilbert matrix, and define $g^{oo}, g_i^o, s^o, etc.$ as previously. Furthermore, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_i^+ = s_i^o + s_i^e$ and $s_i^- = s_i^e- s_i^o$. Then:
+Let $G=H^{-1}$ be the inverse of a Hilbert matrix of dimension $N$, and define $g^{oo}, g_i^o, s^o, etc.$ as previously. If $N$ is even, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_i^+ = s_i^o + s_i^e$ and $s_i^- = s_i^e- s_i^o$. Otherwise, let $s^- = s^o - s^e, s_i^- = s_i^o - s_i^e$. Then:
 
 \begin{equation}\label{ratio-of-absolute-difference-inequality}
 \frac{s^+}{s^-} < \frac{s_i^+}{s_i^-} 
 \end{equation} Furthermore, this is equivalent to 
-\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}. \]
+\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}, \qquad \text{for N even} \]
+\[ \frac{s^o}{s^e} > \frac{s^o_k}{s^e_k}, \qquad \text{for N odd} \]
 \end{thm}  We choose to work with this ratio as opposed to the one in \ref{ratio-of-sums} because the differences between the two are magnified, giving us a larger room for error. The manipulations to achieve the inequality are thus more conveniently derived. 
 \begin{proof}
-We first prove equivalence of the theorems. Note 
+We first prove equivalence of the theorems, focusing on even $N$. The odd case is analagous. Note 
 \begin{align*}
 &\frac{s^o}{s^e} < \frac{s^o_k}{s^e_k} \\
 \iff & \frac{s^+ - s^-}{s^+ +s^-} <\frac{s^+_k - s^-_k}{s^+_k +s^-_k} \\
@@ -295,7 +303,7 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 &= (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} 
 \end{align*} and plugging into the RHS and expanding gives 
 \begin{align*}
-&\frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{i-1} \dbinom{p+k+j-2}{j-1} }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
+&\frac{\sum_{j=1}^N (p+k+j-1) \dbinom{N+p+k-1}{N-j} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1} \dbinom{p+k+j-2}{j-1} }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
 &= \frac{ (N+p+k-1)\sum_{j=1}^N  \dbinom{N+p+k-2}{p+k+j-2} \dbinom{N+p+j-1}{N-k} \dbinom{p+k+j-2}{k-1} \dbinom{p+k+j-2}{j-1} }{ (N+p+k-1) \dbinom{N+p+k-2}{N-1} \dbinom{N-1}{k-1} }  \\
 &= \frac{\sum_{j=1}^N \frac{(N+p+k-2)!}{(p+k+j-2)!(N-j)!} \frac{(N+p+j-1)!}{(N-k)! (p+j+k-1)!} \left(\frac{(p+k+j-2)!^2}{(k-1)! (p+j-1)!(j-1)!(p+k-1)!}\right)}{\frac{(N+p+k-2)!}{(N-1)! (p+k-1)!} \frac{(N-1)!}{(k-1)! (N-k)!}}
 \\
@@ -307,4 +315,4 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j} \frac{j}{p+j+N-1} > \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j}\frac{1}{p+N}
 \end{align*} since the fraction $\frac{j}{p+j+N-1}$ is increasing in $j$ because both $j$ and $p+N-1$ positive.
 \end{proof}
-\end{document}
+\end{document} 
