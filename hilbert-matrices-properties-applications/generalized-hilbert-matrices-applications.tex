@@ -124,9 +124,13 @@ Let $H$ be a generalized Hilbert matrix of size $N$ and $B \in M_{N\times 2}$ is
 Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
 \end{thm} 
 
-We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Our problem amounts to minimizing 
-\[ \frac{1}{2} a^T H a - \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}^T (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} )\] 
-Taking the derivative with respect to $a$, we see that we must have 
+We can obtain expressions for $\hat{a}$ via the method of Lagrange multipliers. Consider the generalized Lagrangian: 
+\[ L(a,\lambda) = \frac{1}{2} a^T H a + \lambda^T (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} ) \]
+Since the objective function associated with this Lagrangian is clearly convex and the equality condition is a hyperplane (affine), by KKT, a vector $a^*$ is a minimum of $f(a) = \frac{1}{2} a^T H a$ if and only if there exists a $\lambda^*$ such that together the pair $a^*, \lambda^*$ satisfy $\frac{\partial L(a^*,\lambda^*)}{\partial a} = \frac{\partial L(a^*,\lambda^*)}{\partial \lambda} = 0$. It will be more convenient to work with the alternate expression 
+\[ L'(a,\lambda) = L(a,-\lambda) = \frac{1}{2} a^T H a - \lambda^T (B^Ta - \begin{pmatrix} -1 \\ 1 \end{pmatrix} ) \] 
+Note that $\frac{\partial L'(a^*,\lambda^*)}{\partial a} = \frac{\partial L(a^*, -\lambda^*)}{\partial a}$, and $\frac{\partial L'(a^*,\lambda^*)}{\partial \lambda} = -\frac{\partial L(a^*, -\lambda^*)}{\partial \lambda}$, so if both partials of $L'$ are zero at $(a^*, \lambda^*)$, then both partials of $L$ are zero at $(a^*, -\lambda^*)$. Thus we must simply find the values of $\lambda, a$ such that the partials of $L'$ are zero. \\
+
+Now, taking the derivative with respect to $a$, we see that we must have 
 \[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
 under the constraint 
 \begin{align*}
@@ -315,4 +319,66 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j} \frac{j}{p+j+N-1} > \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j}\frac{1}{p+N}
 \end{align*} since the fraction $\frac{j}{p+j+N-1}$ is increasing in $j$ because both $j$ and $p+N-1$ positive.
 \end{proof}
+
+\section{Quadrature Loss}
+We now show that not only does this optimization of quasi-conjugate polynomial pairs give us well-behaved polynomials with positive coefficients, but also that our quadrature loss vanishes as the maximal degree allowed $N$ is increased. 
+
+\begin{thm}
+Let $a^* = \argmin_{a\in\mathbb{R}^N} \frac{1}{2} a^T H a, \quad B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix}$ where $B$ is the $N$ by 2 matrix of alternating 1s and 0s as before. Define $f(N) = \frac{1}{2}(a^*)^T H a^*$ the minimum for the objective function achieved for dimension $N$. Then $f(N) \to 0$ as $N\to \infty$.
+\end{thm}
+\begin{proof}
+Abusing notation, we will simply write $a$ as the optimal vector of coefficients. We proceed to by deriving an alternative expression for the objective function using our previous results and then prove some facts about the growth. Now, we have
+\begin{align*}
+\frac{1}{2}a^T Ha &= \frac{1}{2}(H^{-1}B \lambda)^TH(H^{-1}B \lambda) \\
+&= \frac{1}{2} \lambda^T B^T H^{-1}B \lambda \\
+&= \frac{1}{2} \lambda^T K\lambda, \quad \text{where } K= \begin{pmatrix} g^{oo} & g^{oe} \\
+g^{eo} & g^{ee} \end{pmatrix}.
+\end{align*} But $\lambda = K^{-1} \begin{pmatrix} -1 \\ 1 \end{pmatrix} = \lambda_G \begin{pmatrix} -g^e \\ g^o \end{pmatrix}$, where $\lambda_G = \frac{1}{g^{oo} g^{ee} - g^{eo}g^{oe}} >0$, so noting the symmetry of $K$, we have 
+\begin{align*}
+\frac{1}{2} a^T Ha &= \frac{1}{2}\begin{pmatrix} -1 \\ 1\end{pmatrix} ^T K^{-1} K \lambda \\ 
+&= \frac{\lambda_G}{2}(-1 \; 1) \begin{pmatrix} -g^e \\ g^o \end{pmatrix}\\
+&= \frac{g^e + g^o}{2(g^{oo} g^{ee} - g^{eo}g^{oe})}\\
+&= \frac{N(p+N)}{2(g^{oo}g^{ee} - (g^{oe})^2)}
+\end{align*}
+Now, let $d=|g^{oe}| - |g^{oo}|$. Then since $N(p+N) = g^{ee} + g^{oo} + g^{oe} + g^{eo} = g^{oo}+g^{ee} - 2|g^{oe}|$, we may write $g^{oo} = |g^{oe}|-d$, $g^{ee} = |g^{oe}| + d + N(P+N)$. Thus 
+\begin{align*}
+g^{oo} g^{ee} - g^{eo}g^{oe} &=  (|g^{oe} + d + N(p+N)) (|g^{oe}| - d) - |g^{oe}|^2 \\
+&= N(p+N)(g^{oo}) - d^2
+\end{align*}
+We now examine the growth of $g^{oo}$ and $d^2$. $d$ is simply a sign change times the sum of the odd rows. We have
+\[d = (-1)^N \sum_{i \text{ odd}}^N \frac{\prod_{k=1}^{N-1} (p+i+k)}{(i-1)!(N-i)!} \] 
+and thus we may write 
+\[d^2 = \sum_{i,j \text{ odd}}^N 
+\frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \]
+
+On the other hand, using the fact that $g^{oo}$ is a sum of only positive entries we can write 
+\[g^{oo} = \sum_{i,j \text{ odd}}^N \frac{1}{p+i+j-1} \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\]
+\end{proof} So we can write the denominator of our objective function value as
+
+\begin{align*} 2(g^{oo} g^{ee}-(g^{oe})^2) &= 2(N(p+N)(g^{oo}) - d^2)\\ &= \sum_{i,j \text{ odd}}^N \left( \frac{2*N(p+N)}{p+i+j-1} - 1\right) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
+& \ge \sum_{i,j \text{ odd}}^N (N-1) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\\
+&\ge \sum_{i,j \text{ odd}}^N (N-1) \frac{(N-1)!^2}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
+&= \sum_{i,j \text{ odd}}^N (N-1) \dbinom{N-1}{i-1} \dbinom{N-j}{j-1} \end{align*}
+ which clearly grows at least as large as $O(N^3)$. Since our numerator grows like $O(N^2)$, we are done.
+
+% thus begins a LONNG COMMENT
+
+\begin{comment} Note that $N-i + i-1 = N-1$, so at least one of them must be less than $N/2$. Thus $\frac{(N-1)!}{(N-i)!(i-1)!} \ge 2^{\min(N-i,i-1)}$. Now, for any positive $i,p$, 
+\begin{align*}
+\prod_{k=0}^{N-1} p+i+k & \ge (N-1)! \\
+& >= (i-1)!(N-i)! 
+\end{align*} and thus our lower bound from our last inequality is greater than 
+\begin{align*}
+\sum_{i,j \text{ odd}}^N N-1 = \frac{N^3-N^2}{4}
+\end{align*} which grows like $N^3$
+
+Now, consider $A(i,j) = \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}$. For $i<N$, 
+\begin{align*}
+A(i+1,j) &= \frac{\prod_{k=0}^{N-1} (p+i+k+1)(p+j+k)}{(i)! (N-i-1)! (j-1)! (N-j)!}\\
+&= \frac{(N-i)(p+N+i)}{i(p+i)}\frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\\
+&=\frac{(N-i)(p+N+i)}{i(p+i)} A(i,j)
+\end{align*}\end{comment}
+% thus ends a LONNG COMMENT
+
+
 \end{document} 
