@@ -355,7 +355,7 @@ On the other hand, using the fact that $g^{oo}$ is a sum of only positive entrie
 \[g^{oo} = \sum_{i,j \text{ odd}}^N \frac{1}{p+i+j-1} \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\]
 \end{proof} So we can write the denominator of our objective function value as
 
-\begin{align*} 2(g^{oo} g^{ee}-(g^{oe})^2) &= 2(N(p+N)(g^{oo}) - d^2)\\ &= \sum_{i,j \text{ odd}}^N \left( \frac{2*N(p+N)}{p+i+j-1} - 1\right) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
+\begin{align*} 2(g^{oo} g^{ee}-(g^{oe})^2) &= 2(N(p+N)(g^{oo}) - d^2)\\ &= \sum_{i,j \text{ odd}}^N \left( \frac{2N(p+N)}{p+i+j-1} - 1\right) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
 & \ge \sum_{i,j \text{ odd}}^N (N-1) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\\
 &\ge \sum_{i,j \text{ odd}}^N (N-1) \frac{(N-1)!^2}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
 &= \sum_{i,j \text{ odd}}^N (N-1) \dbinom{N-1}{i-1} \dbinom{N-j}{j-1} \end{align*}
