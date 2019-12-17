@@ -80,10 +80,10 @@ We can think of $p_e, p_o$ as functions of $K/G/K$ where $G=SO(3)$ and $K$ is an
 We desire that both $p_e$ and $p_o$ are zero at the equator and 1 at the poles and are positive. Other desirable qualities (that we do not precisely demand) are monotonicity and concentration.\\
 
 Fix some even integer $N$. We will require $\deg p_e \le N$. For quasi-conjugacy we seek to minimize: 
-\begin{align*}
-&\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 \sin\theta d\theta\\
+\begin{align}
+&\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 \sin\theta d\theta\\ \label{quasiconjugacy-poly-formulation}
 &= \int_0^1 (p_e(z) - p_o(z))^2 dz
-\end{align*}
+\end{align}
 
 Let $p(z) = a_Nz^N + a_{N-1}z^{N-1} + ... + a_0 = p_e(z) - p_o(z)$. Note that the coefficients of $p$ correspond in a straightforward way to $p_e$, $p_o$, with the mere modification of sign in $p_o$. We require $p(0) = 0$, $p(1) = 1$. Write $a\in \mathbb{R}^N$ with $a(i) = a_i$ in $p$. Then our problem can be rewritten as: 
 
@@ -97,7 +97,7 @@ Let $p(z) = a_Nz^N + a_{N-1}z^{N-1} + ... + a_0 = p_e(z) - p_o(z)$. Note that th
 
 We will in fact prove that such a solution $a$ is always alternating in sign so that the corresponding $p_e, p_o$ have only positive coefficients (and thus are in fact positive and monotone). To do so, we will need some theory on the generalized Hilbert matrix. 
 
-\section{Formulation as Generalized Hilbert Matrix Problem}\label{formulationa-hilbert}
+\section{Formulation as Generalized Hilbert Matrix Problem}\label{formulation-hilbert}
 \begin{defn} 
 Let $\mathbb{Z} \ni p \ge 0$. A \emph{generalized Hilbert matrix} is a matrix $H\in M_n(\mathbb{R})$ whose entries are defined: 
 $H_{ij} = \frac{1}{i+j-1+p}$
@@ -187,15 +187,15 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 \begin{prop}\label{inverse-hilbert-matrix-row}
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Fix some $i \in \{1,...,N\}$. Then the sum of the entries of row $i$ is given by: 
 \begin{align}\label{sum-of-row}
-\sum_{j=1}^N G_{ij} &= (-1)^{n+i} \frac{\prod_{k=0}^{N-1} (p+i+k)}{(i-1)! (N-i)!} \\
-&= (-1)^{n+i} i \dbinom{N-1+p+i}{N} \dbinom{N}{i} \label{sum-of-row-combinatorial-form}
+\sum_{j=1}^N G_{ij} &= (-1)^{N+i} \frac{\prod_{k=0}^{N-1} (p+i+k)}{(i-1)! (N-i)!} \\
+&= (-1)^{N+i} i \dbinom{N-1+p+i}{N} \dbinom{N}{i} \label{sum-of-row-combinatorial-form}
 \end{align}
 \end{prop}
 
 \begin{prop}\label{inverse-hilbert-matrix-total} 
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the sum of entry of the matrix is given by:
 \begin{equation}\label{total-sum}
-\sum_{i,j=1}^N G_{ij} = n(p+n).
+\sum_{i,j=1}^N G_{ij} = N(p+N).
 \end{equation}
 \end{prop} 
 A note on source: The equation \ref{entries} is given in (Collar, "On the Reciprocation of Certain Matrices"). The equations \ref{sum-of-row}, \ref{total-sum} are given in (Smith, "Two Theorems on Inverses of Finite Segments of the Generalized Hilbert Matrix). The alternate expressions \ref{entries-combinatorial-form}, \ref{sum-of-row-combinatorial-form} are easily verified. 
@@ -216,7 +216,7 @@ $\lambda_G$ as defined earlier is positive.
 \end{prop}
 \begin{proof}
 First, note that $H$ is positive definite, and therefore $G=H^{-1}$ is positive definite. Thus, for any $x= \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \in \mathbb{R}^2$, $x^T B^TGBx = (x_1 x_2 \cdots x_2) G \begin{pmatrix} x_1 \\ x_2 \\ \vdots x_2 \end{pmatrix} > 0$ when $x$ is not identically zero. (More to the point, $B$ has full column rank). \\
-Thus $B^TGB \in M_2(\mathbb{R})$ with positive determinant. Since $\lambda_G = \frac{1}{\det BT^GB} >0 $ as needed.
+Thus $B^TGB \in M_2(\mathbb{R})$ with positive determinant. Since $\lambda_G = \frac{1}{\det B^TG B} >0 $ as needed.
 \end{proof}
 \section{Proof} 
 
@@ -358,27 +358,29 @@ On the other hand, using the fact that $g^{oo}$ is a sum of only positive entrie
 \begin{align*} 2(g^{oo} g^{ee}-(g^{oe})^2) &= 2(N(p+N)(g^{oo}) - d^2)\\ &= \sum_{i,j \text{ odd}}^N \left( \frac{2N(p+N)}{p+i+j-1} - 1\right) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
 & \ge \sum_{i,j \text{ odd}}^N (N-1) \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\\
 &\ge \sum_{i,j \text{ odd}}^N (N-1) \frac{(N-1)!^2}{(i-1)! (N-i)! (j-1)! (N-j)!} \\
-&= \sum_{i,j \text{ odd}}^N (N-1) \dbinom{N-1}{i-1} \dbinom{N-j}{j-1} \end{align*}
- which clearly grows at least as large as $O(N^3)$. Since our numerator grows like $O(N^2)$, we are done.
+&= \sum_{i,j \text{ odd}}^N (N-1) \dbinom{N-1}{i-1} \dbinom{N-1}{j-1}\\
+&= (N-1) \left(\sum_{i' \text{even}}^{N-1} \dbinom{N-1}{i'}\right) \left( \sum_{j' \text{even}}^{N-1} \dbinom{N-1}{j'}\right)\\
+&= (N-1)(2^{N-2})(2^{N-2}) = (N-1)2^{2N-4}
+\end{align*} 
+Since our numerator grows like $O(N^2)$, we are done, we see clearly that our fraction vanishes as $N \to \infty$.
 
-% thus begins a LONNG COMMENT
+\section{Concentration and Convergence}
 
-\begin{comment} Note that $N-i + i-1 = N-1$, so at least one of them must be less than $N/2$. Thus $\frac{(N-1)!}{(N-i)!(i-1)!} \ge 2^{\min(N-i,i-1)}$. Now, for any positive $i,p$, 
-\begin{align*}
-\prod_{k=0}^{N-1} p+i+k & \ge (N-1)! \\
-& >= (i-1)!(N-i)! 
-\end{align*} and thus our lower bound from our last inequality is greater than 
-\begin{align*}
-\sum_{i,j \text{ odd}}^N N-1 = \frac{N^3-N^2}{4}
-\end{align*} which grows like $N^3$
+In this section we prove a few results related to the behavior of our optimal functions as $N\to \infty$. We try to answer what might be useful questions regarding concentration. 
 
-Now, consider $A(i,j) = \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}$. For $i<N$, 
-\begin{align*}
-A(i+1,j) &= \frac{\prod_{k=0}^{N-1} (p+i+k+1)(p+j+k)}{(i)! (N-i-1)! (j-1)! (N-j)!}\\
-&= \frac{(N-i)(p+N+i)}{i(p+i)}\frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\\
-&=\frac{(N-i)(p+N+i)}{i(p+i)} A(i,j)
-\end{align*}\end{comment}
-% thus ends a LONNG COMMENT
+Note that for a fixed degree, any polynomial with positive coefficients that add up to 1, the function is bounded from below by $x^N$ for every $x$. With this in mind, we give the following result:
 
+\begin{prop}\label{pointwise-convergence-zero-one-function}
+Let $\hat{p_N}$ be the optimal polynomial derived from the optimization problem in \ref{quasiconjugacy-poly-formulation} of dimension $N$. Fix any positive $x<1$. Then $p_N(x) \to 0$ as $N\to \infty$. 
+\end{prop}
+This proposition essentially says that as we allow the maximum degree of our optimal polynomials to increase, the functions resemble a delta function at 1. Our proof will use the following lemma.
+\begin{lem}\label{coefficients-vanish}
+Let $\hat{a}(N)$ denote the optimal $a$ obtained from the optimization problem \ref{positivity-hilbert-coefficients} of dimension $N$, and $\hat{a}(N,k)$ its $k$-th coefficient. Now, fix $k$. Then, $\hat{a}(N,k) \to 0$ as $N\to \infty$.
+\end{lem}
+\begin{proof}
+\end{proof}
+\begin{proof}
 
-\end{document} 
+\end{proof}
+
+\end{document}
