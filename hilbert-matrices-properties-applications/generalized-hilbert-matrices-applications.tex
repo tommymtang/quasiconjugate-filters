@@ -342,11 +342,12 @@ g^{eo} & g^{ee} \end{pmatrix}.
 \end{align*}
 Now, let $d=|g^{oe}| - |g^{oo}|$. Then since $N(p+N) = g^{ee} + g^{oo} + g^{oe} + g^{eo} = g^{oo}+g^{ee} - 2|g^{oe}|$, we may write $g^{oo} = |g^{oe}|-d$, $g^{ee} = |g^{oe}| + d + N(P+N)$. Thus 
 \begin{align*}
-g^{oo} g^{ee} - g^{eo}g^{oe} &=  (|g^{oe} + d + N(p+N)) (|g^{oe}| - d) - |g^{oe}|^2 \\
+g^{oo} g^{ee} - g^{eo}g^{oe} &=  (|g^{oe}| + d + N(p+N)) (|g^{oe}| - d) - |g^{oe}|^2 \\
+&= (|g^{oe}|+d)(|g^{oe}| - d) + N(p+N)(|g^{oo}|) - |g^{oe}|^2\\
 &= N(p+N)(g^{oo}) - d^2
 \end{align*}
 We now examine the growth of $g^{oo}$ and $d^2$. $d$ is simply a sign change times the sum of the odd rows. We have
-\[d = (-1)^N \sum_{i \text{ odd}}^N \frac{\prod_{k=1}^{N-1} (p+i+k)}{(i-1)!(N-i)!} \] 
+\[d = (-1)^N \sum_{i \text{ odd}}^N \frac{\prod_{k=0}^{N-1} (p+i+k)}{(i-1)!(N-i)!} \] 
 and thus we may write 
 \[d^2 = \sum_{i,j \text{ odd}}^N 
 \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!} \]
@@ -368,19 +369,90 @@ Since our numerator grows like $O(N^2)$, we are done, we see clearly that our fr
 
 In this section we prove a few results related to the behavior of our optimal functions as $N\to \infty$. We try to answer what might be useful questions regarding concentration. 
 
-Note that for a fixed degree, any polynomial with positive coefficients that add up to 1, the function is bounded from below by $x^N$ for every $x$. With this in mind, we give the following result:
-
-\begin{prop}\label{pointwise-convergence-zero-one-function}
-Let $\hat{p_N}$ be the optimal polynomial derived from the optimization problem in \ref{quasiconjugacy-poly-formulation} of dimension $N$. Fix any positive $x<1$. Then $p_N(x) \to 0$ as $N\to \infty$. 
-\end{prop}
-This proposition essentially says that as we allow the maximum degree of our optimal polynomials to increase, the functions resemble a delta function at 1. Our proof will use the following lemma.
+Note that for a fixed degree, any polynomial with positive coefficients that add up to 1, the function is bounded from below by $x^N$ for every $x$. We will prove a proposition that states, essentially, that as we increase the maximum degree allowed during our quadrature-loss optimization, the polynomials we obtain the in the pair begin to resemble a delta function at 1 - that is, the polynomials converge pointwise to 0 (except at $x=1$). First we will require the following lemma.
 \begin{lem}\label{coefficients-vanish}
 Let $\hat{a}(N)$ denote the optimal $a$ obtained from the optimization problem \ref{positivity-hilbert-coefficients} of dimension $N$, and $\hat{a}(N,k)$ its $k$-th coefficient. Now, fix $k$. Then, $\hat{a}(N,k) \to 0$ as $N\to \infty$.
 \end{lem}
+This lemma states that any fixed coefficient goes to 0 in our sequence of optimal vectors $\hat{a}$. We will exploit the fact that $x^m$ decreases with $m$ when $0<x<1$ to use this lemma in our main proposition. 
 \begin{proof}
+We will abuse notation slightly and occasionally write variables down without specifying $N$. Now, recall from earlier that $a_k$ is given by an expression containing values determined by sums of specific coefficients of the generalized Hilbert matrix (of order $p=2$). In particular, we have 
+\begin{align}
+a_{k} &= \lambda_1 g_k^o + \lambda_2g^e_k \\
+&= \lambda_G(-g^eg_k^o + g^og_k^e) \\
+&= \frac{-g^eg_k^o + g^og_k^e}{g^{oo} g^{ee}-(g^{oe})^2}\label{coefficient-ratio-form}
+\end{align}
+Recall that we may write our denominator
+\[g^{oo} g^{ee}-(g^{oe})^2 = N(p+N)g^{oo} - d^2 \]
+where $d$ was the absolute value of the sums of all elements in all odd rows. Denote $r_k = g_k^o + g_k^e$ be the sum of all elements of a row. It is easy to verify that for any $i,j$, we may write
+\begin{align*}
+r_ir_j &= (p+i+j-1) G_{ij} \\
+&= (-1)^{i+j}(p+i+j-1)^2 \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
+\end{align*}
+Now with this last equation we may rewrite the denominator of \ref{coefficient-ratio-form} as:
+\begin{align*}
+g^{oo} g^{ee}-(g^{oe})^2 &= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} r_ir_j \\
+&= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} (p+i+j-1) G_{ij}\\
+&= \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}\\
+&= \sum_{i,h \;\text{odd}} 
+\end{align*}
+Now consider the numerator of  \ref{coefficient-ratio-form}. Noting that $g_k^e = -g_k^o + r_k$, we can rewrite our numerator as: 
+\begin{align*}
+-g^eg_k^o + g^og_k^e &= g^e(-g^o_k) + g^o(-g^o_k + r_k)\\
+&= -g^o_k(g^e+g^o) + g^o r_k\\
+&= -(N(p+N))g_k^o + g^or_k\\
+&= -(N(p+N)\sum_{j \; \text{odd}} G_{kj} + \left(\sum_{j \; \text{odd}}r_j \right)r_k \\
+&= \sum_{j\; \text{odd}} (p+k+j-1 - N(p+N))G_{kj}.
+\end{align*}
+Now, the sign of summands is dependent entirely on $k$. Since $j$ ranges over odd values, $G_{kj}$ is negative is $k$ is even, and positive when $k$ is odd. But the summands have the same sign, so since we are concerned only with magnitude we may flip the sign for convenience. In other words it suffices to show that
+\begin{align}\label{coefficient-expanded-ratio}
+&(-1)^k\frac{-g^eg_k^o + g^og_k^e}{g^{oo} g^{ee}-(g^{oe})^2} = \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}}
+\end{align}
+decays to 0 as $N\to \infty$. Select some $N > 4k$, and let $K = \{i \; \text{odd}: k  \le i \le N/2\}$. We claim that for any $i\in K$, 
+\begin{equation}\label{inequality-sum-of-products} \left|\sum_{j\; \text{odd}} (p+i+j-1 - N(p+N))G_{ij} \right| > \left| \sum_{j\; \text{odd}} (p+k+j-1 - N(p+N))G_{kj} \right|\end{equation}
 \end{proof}
+Since there are at least $N/8-1$ such values in $K$ when $N>4k$, our denominator in \ref{coefficient-expanded-ratio} is at least $N/16$ times the numerator, and therefore our ratio in \ref{coefficient-expanded-ratio} is bounded by $\frac{16}{N}$. Now to prove the inequality \ref{inequality-sum-of-products}. We will show that our the summands of our expression, considered as a function of $i$ (with fixed $j$, increases on the interval $[1, N/2]$. In fact, assuming the sign is positive, we write 
+\begin{align*}
+&(N(p+N)-(p+i+j-1)) G_{ij}\\
+&= (N(p+N)-(p+i+j-1))(p+i+j-1)\dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
+\end{align*} We will show that this expression as a function of $i$ is increasing on the interval $[1,N/2]$. First assume that $j>1$. First note that $\dbinom{N+p+i-1}{N-j}$ is clearly increasing in $i$. Now, we can write \begin{align*}
+(p+i+j-1)\dbinom{N+p+j-1}{N-i}\dbinom{p+i+j-2}{i-1} &= (p+i+j-1)\frac{(N+p+j-1)!(p+i+j-2)!}{(N-i)!(p+i+j-1)!(i-1)!(p+j-1)!}\\
+&= \frac{(N+p+j-1)!}{(N-i)!(i-1)!(p+j-1)!}\\
+&= \frac{(N+p+j-1)!}{(p+j-1)!}\frac{1}{(N-1)!}\dbinom{N-1}{i-1}
+\end{align*} which depends only on $i$ in the binomial term, and thus is increasing in $i$ whenever $i-1 < (N-1)/2$, guaranteed on the interval $[1,N/2]$. It remains to show that 
+\[f(i) = (N(p+N)-(p+i+j-1))\dbinom{p+i+j-2}{j-1}\]
+increases in $i$. But 
+\begin{align*}
+\frac{f(i+1)}{f(i)} &= \frac{(N(p+N)-(p+i+j))\dbinom{p+i+j-1}{j-1}}{(N(p+N)-(p+i+j-2))\dbinom{p+i+j-2}{j-1}}\\
+&= \frac{(N(p+N)-(p+i+j))\frac{(p+i+j-1)!}{(j-1)!(p+i)!}}{(N(p+N)-(p+i+j-1))\frac{(p+i+j-2)!}{(j-1)!(p+i-1)!}}\\
+&= \frac{(N(p+N)-(p+i+j))(p+i+j-1)}{(N(p+N)-(p+i+j-1))(p+i)}
+\end{align*}
+Note that $p+i+j-1 > p+i-1$ when $j>1$. Furthermore, for $N>4$, the terms $N(p+N)-(p+i+j) > p+i+j-1$. Thus this fraction can be rewritten as 
+\[\frac{A+1}{A} \frac{B+c}{B}\]
+where $A>B$ and $c\ge 1$. Clearly, then, $\frac{B+c}{B} > \frac{A+1}{A}$ and so $\frac{f(i+1)}{f(i)} > 1$ and is therefore increasing in $i$. 
+Thus, for $j>1$, we have given groupings of the factors that are all increasing in $i$ on the interval $[1,N/2]$ (for loose conditions on the lower bound of $N$). \\
+To finish we simply consider the case when $j=1$. Then we can simplify our expression as
+\begin{align*}
+(N(p+N)-(p+i))G_{i1} &= (N(p+N)-(p+i))(p+i)\dbinom{N+p+i-1}{N-1}\dbinom{N+p}{N-i}\dbinom{p+i-1}{i-1}
+\end{align*}
+
+
+\begin{prop}\label{pointwise-convergence-zero-one-function}
+Let $\hat{p_N}$ be the optimal polynomial derived from the optimization problem in \ref{quasiconjugacy-poly-formulation} of dimension $N$. Let $x\in (0,1)$. Then $p_N(x) \to 0$ as $N\to \infty$. 
+\end{prop}
+This proposition essentially says that as we allow the maximum degree of our optimal polynomials to increase, the functions resemble a delta function at 1. Our proof will use the following lemma.
+
 \begin{proof}
-
+Let $\epsilon > 0$. Denote $p_N$ the polynomial of degree $N$ obtained through our optimization, and let $a_{N,k}$ denote its $k$-th coefficient to $x^k$, where $k \le N$.\\
+First, there is some $M$ such that $x^M < \frac{\epsilon}{2}$. \\
+Moreover, by Lemma \ref{coefficients-vanish}, there is some $N$ such that $\max (a_{N,1}, a_{N,2},..., a_{N,M-1}) < \frac{\epsilon(1-x)}{2x}$. By the results of the Lemma we are guaranteed there is such a $N>M$, so that this is well-defined. Selecting such a $M, N$, let $\hat{a}(N,M) = \max (a_{N,1}, a_{N,2},..., a_{N,M-1}) $.\\
+Now,
+\begin{align*}
+p_N(x) &= \sum_{k=1}^{M-1} a_{N,k} x^k + \sum_{k=M}^N a_{N,k}x ^k\\
+&< \hat{a}(N,M) \sum_{k=1}^{M-1} x^ k + \sum_{k=M}^N a_{N,k} x^M \\
+&< \frac{\epsilon(1-x)}{2} \sum_{k=1}^\infty x^k + x^M \sum_{k=M}^N a_{N,k}\\
+& < \frac{\epsilon(1-x)}{2x} \frac{x}{1-x} + x^M \\
+&< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align*}
+as needed.
 \end{proof}
-
 \end{document}

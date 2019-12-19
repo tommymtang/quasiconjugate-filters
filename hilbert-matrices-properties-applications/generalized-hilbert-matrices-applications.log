@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  17 DEC 2019 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  19 DEC 2019 11:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1154,20 +1154,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 295--296
  []
 
 [8] [9] [10] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 386.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 386.
+Overfull \hbox (66.98502pt too wide) in paragraph at lines 417--417
+[] 
+ []
+
+[12]
+Overfull \hbox (41.85063pt too wide) in paragraph at lines 421--421
+[] 
+ []
+
+[13] [14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 458.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 458.
  (./generalized-hilbert-matrices-applications.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 386.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 386.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 458.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 458.
 Package rerunfilecheck Info: File `generalized-hilbert-matrices-applications.ou
 t' has not changed.
 (rerunfilecheck)             Checksum: 599BE3764C5C3FC3A796EEDA67377DBB;432.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 29265 strings out of 492995
- 547034 string characters out of 6132704
- 627717 words of memory out of 5000000
- 32374 multiletter control sequences out of 15000+600000
+ 29276 strings out of 492995
+ 547195 string characters out of 6132704
+ 627891 words of memory out of 5000000
+ 32377 multiletter control sequences out of 15000+600000
  11347 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,14n,54p,10430b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1185,11 +1199,11 @@ live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on generalized-hilbert-matrices-applications.pdf (11 pages, 1931
-98 bytes).
+Output written on generalized-hilbert-matrices-applications.pdf (14 pages, 2068
+62 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
- 181 compressed objects within 2 object streams
- 52 named destinations out of 1000 (max. 500000)
+ 236 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
  69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
