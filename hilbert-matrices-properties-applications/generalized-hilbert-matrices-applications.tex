@@ -369,7 +369,34 @@ Since our numerator grows like $O(N^2)$, we are done, we see clearly that our fr
 
 In this section we prove a few results related to the behavior of our optimal functions as $N\to \infty$. We try to answer what might be useful questions regarding concentration. 
 
-Note that for a fixed degree, any polynomial with positive coefficients that add up to 1, the function is bounded from below by $x^N$ for every $x$. We will prove a proposition that states, essentially, that as we increase the maximum degree allowed during our quadrature-loss optimization, the polynomials we obtain the in the pair begin to resemble a delta function at 1 - that is, the polynomials converge pointwise to 0 (except at $x=1$). First we will require the following lemma.
+Note that for a fixed degree, any polynomial with positive coefficients that add up to 1, the function is bounded from below by $x^N$ for every $x$. We will prove a proposition that states, essentially, that as we increase the maximum degree allowed during our quadrature-loss optimization, the polynomials we obtain the in the pair begin to resemble a delta function at 1 - that is, the polynomials converge pointwise to 0 (except at $x=1$). We will require two lemmas. 
+
+The first lemma is a computational lemma that will make the proof of the second lemma, one on the behavior of the $k$th coefficient of $\hat{a}$, easier to prove. We have
+\begin{lem}\label{computational-inequality-lemma}
+Let $N$ be sufficiently large - say, larger than both $p$ and $2$, and fix $j \le N$. Then the expression:
+\begin{equation} \label{weighted-entries-increasing-expression}(N(p+N)-(p+i+j-1))|G_{ij}|\end{equation} is increasing in $i$ on the interval $[1,N/2]$.
+\end{lem}
+\begin{proof}
+We first expand (\ref{weighted-entries-increasing-expression}) as
+\[(N(p+N)-(p+i+j-1))(p+i+j-1)\dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}\]
+Expanding and collecting terms that do not depend on $i$ in a positive coefficient $C(N,j,p)$, we consider 
+\begin{align*}
+&C(N,j,p)(N(p+N)-(p+i+j-1))(p+i+j-1) \frac{(N+p+i-1)!(p+i+j-2)!^2}{(p+i+j-1)!^2(N-i)!(i-1)!(p+i-1)!}\\
+&= C(N,j,p)(N(p+N)-(p+i+j-1))\frac{(N+p+i-1)!(p+i+j-2)!(N-1)!}{(p+i+j-1)!(p+i-1)!(N-i)!(i-1)!}\\
+&= C'(N,j,p)(N(p+N)-(p+i+j-1))\frac{(N+p+i-1)!(p+i+j-2)!}{(p+i+j-1)!(p+i-1)!}\dbinom{N-1}{i-1}
+\end{align*} Now, $\dbinom{N-1}{i-1}$ is increasing in $i$ when $i-1 < (N-1)/2 \iff i < \frac{N+1}{2}$. Thus our rightmost factor increases with $i$ on our interval [1,N/2]. Now, we consider the remaining factors depending on $i$ as a function of $i$ (regarding $N, j$ as constants):
+\[f(i) = (N(p+N)-(p+i+j-1))\frac{(N+p+i-1)!(p+i+j-2)!}{(p+i+j-1)!(p+i-1)!}\]
+Then, we may compute:
+\begin{align*}
+\frac{f(i+1)}{f(i)} &= \frac{(N(p+N)-(p+i+j))\frac{(N+p+i)!(p+i+j-1)!}{(p+i+j)!(p+i)!}}{(N(p+N)-(p+i+j-1))\frac{(N+p+i-1)!(p+i+j-2)!}{(p+i+j-1)!(p+i-1)!}} \\
+&= \frac{(N(p+N)-(p+i+j))}{(N(p+N)-(p+i+j-1))} \frac{(N+p+i)(p+i+j-1)}{(p+i+j)(p+i)}\
+\end{align*}
+Since $1\le j \le N$, for at least one of $\frac{N+p+i}{j+p+i}, \frac{p+i+j-1}{p+i}$, the numerator is greater than the denominator by at least one (and they are both at least 1). Now, $N(p+N)-(p+i+j-1) > p+i+j \iff N^2 +Np>2p+2i+2j-1$. But $2i+2j-1<4N$, so if $N>4$ then $N^2+Np>4N+4p>2i+2j-1+2p$. Similarly, $N(p+N)-(p+i+j-1)>p+i$ under weak conditions on $N$, and thus letting $A=N(p+N)-(p+i+j)$ and $B<A$, we have 
+\[\frac{f(i+1)}{f(i)} > \frac{A}{A+1} \frac{B+1}{B} > 1\]
+as needed.
+\end{proof} 
+
+Now we prove a lemma on the coefficients of our optimally obtained vector $\hat{a}$.
 \begin{lem}\label{coefficients-vanish}
 Let $\hat{a}(N)$ denote the optimal $a$ obtained from the optimization problem \ref{positivity-hilbert-coefficients} of dimension $N$, and $\hat{a}(N,k)$ its $k$-th coefficient. Now, fix $k$. Then, $\hat{a}(N,k) \to 0$ as $N\to \infty$.
 \end{lem}
@@ -392,8 +419,7 @@ Now with this last equation we may rewrite the denominator of \ref{coefficient-r
 \begin{align*}
 g^{oo} g^{ee}-(g^{oe})^2 &= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} r_ir_j \\
 &= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} (p+i+j-1) G_{ij}\\
-&= \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}\\
-&= \sum_{i,h \;\text{odd}} 
+&= \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}
 \end{align*}
 Now consider the numerator of  \ref{coefficient-ratio-form}. Noting that $g_k^e = -g_k^o + r_k$, we can rewrite our numerator as: 
 \begin{align*}
@@ -407,34 +433,14 @@ Now, the sign of summands is dependent entirely on $k$. Since $j$ ranges over od
 \begin{align}\label{coefficient-expanded-ratio}
 &(-1)^k\frac{-g^eg_k^o + g^og_k^e}{g^{oo} g^{ee}-(g^{oe})^2} = \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}}
 \end{align}
-decays to 0 as $N\to \infty$. Select some $N > 4k$, and let $K = \{i \; \text{odd}: k  \le i \le N/2\}$. We claim that for any $i\in K$, 
+decays to 0 as $N\to \infty$. Take $N>4k$, and let $K = \{i \; \text{odd}: N/4  \le i \le N/2\}$. First, note that this implies $N>4$, and that $|K|$ is approximately $N/8$. Certainly, for large $N$ we may say that $|K|>N/16$. Furthermore, since $k<N/4$, by Lemma \ref{computational-inequality-lemma}, we have that for any $i\in K$, 
 \begin{equation}\label{inequality-sum-of-products} \left|\sum_{j\; \text{odd}} (p+i+j-1 - N(p+N))G_{ij} \right| > \left| \sum_{j\; \text{odd}} (p+k+j-1 - N(p+N))G_{kj} \right|\end{equation}
+Thus from (\ref{coefficient-expanded-ratio}), we may write
+\begin{align*}
+\frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}} &< \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{j\; \text{odd, }\; i\in K}  (N(p+N) -(p+i+j-1))G_{ij}}\\
+& < \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{\frac{N}{16} \sum_{j \; \text{odd}}  (N(p+N) -(p+k+j-1))G_{kj}} = \frac{16}{N}
+\end{align*} which clearly decays to 0 as $N\to \infty$. QED
 \end{proof}
-Since there are at least $N/8-1$ such values in $K$ when $N>4k$, our denominator in \ref{coefficient-expanded-ratio} is at least $N/16$ times the numerator, and therefore our ratio in \ref{coefficient-expanded-ratio} is bounded by $\frac{16}{N}$. Now to prove the inequality \ref{inequality-sum-of-products}. We will show that our the summands of our expression, considered as a function of $i$ (with fixed $j$, increases on the interval $[1, N/2]$. In fact, assuming the sign is positive, we write 
-\begin{align*}
-&(N(p+N)-(p+i+j-1)) G_{ij}\\
-&= (N(p+N)-(p+i+j-1))(p+i+j-1)\dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
-\end{align*} We will show that this expression as a function of $i$ is increasing on the interval $[1,N/2]$. First assume that $j>1$. First note that $\dbinom{N+p+i-1}{N-j}$ is clearly increasing in $i$. Now, we can write \begin{align*}
-(p+i+j-1)\dbinom{N+p+j-1}{N-i}\dbinom{p+i+j-2}{i-1} &= (p+i+j-1)\frac{(N+p+j-1)!(p+i+j-2)!}{(N-i)!(p+i+j-1)!(i-1)!(p+j-1)!}\\
-&= \frac{(N+p+j-1)!}{(N-i)!(i-1)!(p+j-1)!}\\
-&= \frac{(N+p+j-1)!}{(p+j-1)!}\frac{1}{(N-1)!}\dbinom{N-1}{i-1}
-\end{align*} which depends only on $i$ in the binomial term, and thus is increasing in $i$ whenever $i-1 < (N-1)/2$, guaranteed on the interval $[1,N/2]$. It remains to show that 
-\[f(i) = (N(p+N)-(p+i+j-1))\dbinom{p+i+j-2}{j-1}\]
-increases in $i$. But 
-\begin{align*}
-\frac{f(i+1)}{f(i)} &= \frac{(N(p+N)-(p+i+j))\dbinom{p+i+j-1}{j-1}}{(N(p+N)-(p+i+j-2))\dbinom{p+i+j-2}{j-1}}\\
-&= \frac{(N(p+N)-(p+i+j))\frac{(p+i+j-1)!}{(j-1)!(p+i)!}}{(N(p+N)-(p+i+j-1))\frac{(p+i+j-2)!}{(j-1)!(p+i-1)!}}\\
-&= \frac{(N(p+N)-(p+i+j))(p+i+j-1)}{(N(p+N)-(p+i+j-1))(p+i)}
-\end{align*}
-Note that $p+i+j-1 > p+i-1$ when $j>1$. Furthermore, for $N>4$, the terms $N(p+N)-(p+i+j) > p+i+j-1$. Thus this fraction can be rewritten as 
-\[\frac{A+1}{A} \frac{B+c}{B}\]
-where $A>B$ and $c\ge 1$. Clearly, then, $\frac{B+c}{B} > \frac{A+1}{A}$ and so $\frac{f(i+1)}{f(i)} > 1$ and is therefore increasing in $i$. 
-Thus, for $j>1$, we have given groupings of the factors that are all increasing in $i$ on the interval $[1,N/2]$ (for loose conditions on the lower bound of $N$). \\
-To finish we simply consider the case when $j=1$. Then we can simplify our expression as
-\begin{align*}
-(N(p+N)-(p+i))G_{i1} &= (N(p+N)-(p+i))(p+i)\dbinom{N+p+i-1}{N-1}\dbinom{N+p}{N-i}\dbinom{p+i-1}{i-1}
-\end{align*}
-
 
 \begin{prop}\label{pointwise-convergence-zero-one-function}
 Let $\hat{p_N}$ be the optimal polynomial derived from the optimization problem in \ref{quasiconjugacy-poly-formulation} of dimension $N$. Let $x\in (0,1)$. Then $p_N(x) \to 0$ as $N\to \infty$. 
@@ -455,4 +461,5 @@ p_N(x) &= \sum_{k=1}^{M-1} a_{N,k} x^k + \sum_{k=M}^N a_{N,k}x ^k\\
 \end{align*}
 as needed.
 \end{proof}
+
 \end{document}
