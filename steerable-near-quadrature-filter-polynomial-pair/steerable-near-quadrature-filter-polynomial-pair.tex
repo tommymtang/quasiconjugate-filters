@@ -1,8 +1,7 @@
 \documentclass{article}
 
 
-
-\usepackage{arxiv}
+\usepackage{arxiv} % for arxiv template format a
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -14,28 +13,56 @@
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}		% Can be removed after putting your text content
 
+\usepackage[english]{babel}  % english
+\usepackage{amsmath,amsthm,amssymb}% for theorems
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}{Example}[section]
+\numberwithin{equation}{section}
+% ----------------------------------------------------------------
+
+%Just some declaremathoperators
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\BetaDistr}{Beta}
+\DeclareMathOperator{\Bern}{Bern}
+\DeclareMathOperator{\mode}{mode}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\characteristic}{char}
 
 
-\title{Two theorems on polynomial pairs for steerable near quadrature filters}
+\title{On minimizing odd-even polynomial pair differences to construct steerable near-conjugate filter pairs}
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
 
 \author{
- Tommy Tang\thanks{Use footnote for providing further
-    information about author (webpage, alternative
-    address)---\emph{not} for acknowledging funding agencies.} \\
-  Department of Computer Science\\
-  Cranberry-Lemon University\\
-  Pittsburgh, PA 15213 \\
-  \texttt{hippo@cs.cranberry-lemon.edu} \\
+ Tommy M. Tang  \\
+  Department of Radiology and Biomedical Imaging\\
+  Yale University\\
+   300 Cedar St, New Haven\\
+  New Haven, 06510 \\
+  \texttt{tommymtang@gmail.com} \\
   %% examples of more authors
    \And
- Elias D.~Striatum \\
-  Department of Electrical Engineering\\
-  Mount-Sheikh University\\
-  Santa Narimana, Levand \\
-  \texttt{stariate@ee.mount-sheikh.edu} \\
+ Hemant D. Tagare \thanks{ Department of Biomedical Engineering, Electrical Engineering, Statistics and Data Science} \\
+ Department of Radiology and Biomedical Imaging\\
+ Yale University\\
+ 300 Cedar St, New Haven\\
+  New Haven, 06510 \\
+  \texttt{hemant.tagare@yale.edu} \\
   %% \AND
   %% Coauthor \\
   %% Affiliation \\
@@ -64,37 +91,38 @@
 \maketitle
 
 \begin{abstract}
-\lipsum[1]
+For the construction of axially symmetric three-dimensional filters pairs to approximately represent the real and imaginary parts of a quadrature filter - giving the analytic representation of the impulse response of a filter - it is necessary to construct a pair of polynomials - one odd, one even - that differ minimally on the unit interval. This minimization is convex and therefore straightforward to implement. However, it is not clear that such a pair of polynomials would necessarily exhibit other desirable properties of this minimization, such as positivity, concentration at one, or that this difference would vanish as we allow our maximum bandwidth N to increase. We demonstrate that under the constraints that the polynomials vanish at the origin and are normalized so that the coefficients add up to one, we may in fact guarantee (1) the optimally similar polynomial pairs have positive coefficients, (2) the objective function loss vanishes as the maximum degree N allowed approaches infinity and (3) these polynomials converge pointwise to the indicator function at 1 on the relevant unit interval. In the process, we explore various properties of the closely related Hilbert matrices and their inversion. 
 \end{abstract}
 
 
 % keywords can be removed
-\keywords{First keyword \and Second keyword \and More}
+\keywords{steerability \and quadrature \and filter \and quadratic programming \and hilbert matrices}
 
 
 \section{Introduction}
-\lipsum[2]
-\lipsum[3]
+In this section we give the application motives for our results. We introduce the need to approximately represent quadrature filters using near-conjugate filters and explore briefly certain sufficient conditions for steerability. We precisely define our optimization problem in terms of an odd and even polynomial pair under a bandwidth N, and finally reformulate our problem in vectorized form using generalized Hilbert matrices, which is the line of thinking we will adopt for the rest of the paper. 
+\subsection{Motivation}
+On minimizing conjugacy loss of odd and even polynomial filter pairs to represent steerable near quadrature filters
+On steerable near-conjugate polynomial filters pairs to approximate quadrature filters
+On minimizing odd-even polynomial pair differences to construct steerable near-conjugate filter pairs
+[GIVE BACKGROUND ON QUADRATURE FILTERS, NEAR GABOR REPRESENTATIONS, STEERABILITY.... MOTIVATE THE NEED TO FIND SUCH POLYNOMIAL PAIRS]
+Quadrature filters are analytic representations of the impulse response of a real-valued filter - such as a Gabor filter. Since nonzero quadrature filters are complex, they are typically represented as two real-valued filters corresponding to the real and imaginary part of the filter. Therefore it is desirable to construct a pair of functions - one even, one odd - respectively, to represent the filter. In many applications of such filters, it is computationally desirable that such functions are exactly steerable. However, this requires that 
 
+\subsection{The quadratic optimization problem}
+\label{problem}
 
-\section{Headings: first level}
-\label{sec:headings}
+We now formulate the problem precisely. 
 
-\lipsum[4] See Section \ref{sec:headings}.
-
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
-
-\subsubsection{Headings: third level}
-\lipsum[6]
+\subsection{Reformulation with Generalized Hilbert Matrix}
+\label{reformulation-hilbert}
+\begin{defn}\label{generalized-hilbert-matrix}
+A \emph{generalized Hilbert matrix with order p} 
+\end{defn}
 
 \paragraph{Paragraph}
 \lipsum[7]
+\section{Important Properties of the Generalized Hilbert Matrix}
 
-\section{Examples of citations, figures, tables, references}
 \label{sec:others}
 \lipsum[8] \cite{kour2014real,kour2014fast} and see \cite{hadash2018estimate}.
 
@@ -117,7 +145,7 @@ produces
 \end{center}
 
 
-\subsection{Figures}
+\subsection{Definitions and Notations}
 \lipsum[10] 
 See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
 \lipsum[11] 
@@ -129,7 +157,7 @@ See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of th
   \label{fig:fig1}
 \end{figure}
 
-\subsection{Tables}
+\subsection{Exact expression for entries and sum of entries}
 \lipsum[12]
 See awesome Table~\ref{tab:table}.
 
@@ -150,14 +178,17 @@ See awesome Table~\ref{tab:table}.
   \label{tab:table}
 \end{table}
 
-\subsection{Lists}
+\subsection{Notes on magnitudes and signs of important sums}
 \begin{itemize}
 \item Lorem ipsum dolor sit amet
 \item consectetur adipiscing elit. 
 \item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
 \end{itemize}
 
+\section{Theorems and Results}
+\subsection{The positivity of optimal polynomial pair coefficients}
 
+\subsection{Asymptotic behavior of polynomial pairs}
 \bibliographystyle{unsrt}  
 %\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
 %%% and comment out the ``thebibliography'' section.

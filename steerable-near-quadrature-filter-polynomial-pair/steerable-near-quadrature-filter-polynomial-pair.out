@@ -1,8 +1,11 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Headings: first level}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Headings: second level}{section.2}% 3
-\BOOKMARK [3][-]{subsubsection.2.1.1}{Headings: third level}{subsection.2.1}% 4
-\BOOKMARK [1][-]{section.3}{Examples of citations, figures, tables, references}{}% 5
-\BOOKMARK [2][-]{subsection.3.1}{Figures}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{Tables}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{Lists}{section.3}% 8
+\BOOKMARK [2][-]{subsection.1.1}{Motivation}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{The quadratic optimization problem}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Reformulation with Generalized Hilbert Matrix}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Important Properties of the Generalized Hilbert Matrix}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Definitions and Notations}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Exact expression for entries and sum of entries}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{Notes on magnitudes and signs of important sums}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Theorems and Results}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{The positivity of optimal polynomial pair coefficients}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Asymptotic behavior of polynomial pairs}{section.3}% 11

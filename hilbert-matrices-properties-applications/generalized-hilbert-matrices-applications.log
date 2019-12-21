@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  19 DEC 2019 20:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  20 DEC 2019 18:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -79,10 +79,6 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks16
-)
-(/usr/local/texlive/2017/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
-Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
-\symrsfs=\mathgroup4
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
@@ -182,8 +178,8 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup5
-\symAMSb=\mathgroup6
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
@@ -1071,11 +1067,6 @@ LaTeX Info: Redefining \nameref on input line 65.
 
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 67.
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/jknapltx/ursfs.fd
-File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-)
 LaTeX Font Info:    Try loading font information for U+msa on input line 67.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1173,17 +1164,13 @@ Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 465.
 Package rerunfilecheck Info: File `generalized-hilbert-matrices-applications.ou
 t' has not changed.
 (rerunfilecheck)             Checksum: 599BE3764C5C3FC3A796EEDA67377DBB;432.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 29280 strings out of 492995
- 547286 string characters out of 6132704
- 627944 words of memory out of 5000000
- 32379 multiletter control sequences out of 15000+600000
- 11347 words of font info for 43 fonts, out of 8000000 for 9000
+ 29257 strings out of 492995
+ 546731 string characters out of 6132704
+ 627837 words of memory out of 5000000
+ 32365 multiletter control sequences out of 15000+600000
+ 10853 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,14n,54p,10430b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1201,7 +1188,7 @@ ve/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 Output written on generalized-hilbert-matrices-applications.pdf (14 pages, 2081
-82 bytes).
+86 bytes).
 PDF statistics:
  239 PDF objects out of 1000 (max. 8388607)
  206 compressed objects within 3 object streams
