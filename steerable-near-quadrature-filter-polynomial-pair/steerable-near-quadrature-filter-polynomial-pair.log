@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  22 DEC 2019 17:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  23 DEC 2019 15:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -831,44 +831,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
 Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
-[2]
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 165--167
 
  []
 
-[3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+[4] [5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
-[7] [8]
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [8]
+Underfull \vbox (badness 3078) has occurred while \output is active []
+
  [9]
-[10] [11] [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 534.
- [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 534.
+[10] [11] [12] (./steerable-near-quadrature-filter-polynomial-pair.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 514.
+
+[13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 514.
  (./steerable-near-quadrature-filter-polynomial-pair.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 534.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 534.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 514.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 514.
 Package rerunfilecheck Info: File `steerable-near-quadrature-filter-polynomial-
 pair.out' has not changed.
 (rerunfilecheck)             Checksum: 23900E5FF3AD111A4EEB8548F3E2F682;886.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 534.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 514.
  ) 
 Here is how much of TeX's memory you used:
- 8963 strings out of 492995
- 131233 string characters out of 6132704
- 362321 words of memory out of 5000000
- 12162 multiletter control sequences out of 15000+600000
- 66810 words of font info for 160 fonts, out of 8000000 for 9000
+ 8984 strings out of 492995
+ 131579 string characters out of 6132704
+ 363370 words of memory out of 5000000
+ 12167 multiletter control sequences out of 15000+600000
+ 67330 words of font info for 168 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,14n,45p,1278b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,14n,45p,1278b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/tex
 live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
@@ -890,10 +897,10 @@ dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts
 w/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
 Output written on steerable-near-quadrature-filter-polynomial-pair.pdf (13 page
-s, 245722 bytes).
+s, 247488 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 240 compressed objects within 3 object streams
- 72 named destinations out of 1000 (max. 500000)
+ 279 PDF objects out of 1000 (max. 8388607)
+ 243 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
  30809 words of extra memory for PDF output out of 35830 (max. 10000000)
 

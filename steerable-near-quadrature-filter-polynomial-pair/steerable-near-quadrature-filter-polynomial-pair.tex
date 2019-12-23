@@ -44,7 +44,7 @@
 \DeclareMathOperator{\characteristic}{char}
 
 
-\title{On minimizing odd-even polynomial pair differences to construct steerable near-conjugate filter pairs}
+\title{On quasi-conjugate polynomial pairs for three-dimensional steerable near-quadrature filters}
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
@@ -104,11 +104,11 @@ For the construction of axially symmetric three-dimensional filters pairs to app
 \label{Introduction}
 In this section we give the application motives for our results. We introduce the need to approximately represent quadrature filters using near-conjugate filters and explore briefly certain sufficient conditions for steerability. We precisely define our optimization problem in terms of an odd and even polynomial pair under a bandwidth N, and finally reformulate our problem in vectorized form using generalized Hilbert matrices, which is the line of thinking we will adopt for the rest of the paper. 
 \subsection{Motivation}
-On minimizing conjugacy loss of odd and even polynomial filter pairs to represent steerable near quadrature filters
-On steerable near-conjugate polynomial filters pairs to approximate quadrature filters
-On minimizing odd-even polynomial pair differences to construct steerable near-conjugate filter pairs
-[GIVE BACKGROUND ON QUADRATURE FILTERS, NEAR GABOR REPRESENTATIONS, STEERABILITY.... MOTIVATE THE NEED TO FIND SUCH POLYNOMIAL PAIRS]
-Quadrature filters are analytic representations of the impulse response of a real-valued filter - such as a Gabor filter. Since nonzero quadrature filters are complex, they are typically represented as two real-valued filters corresponding to the real and imaginary part of the filter. Therefore it is desirable to construct a pair of functions - one even, one odd - respectively, to represent the filter. In many applications of such filters, it is computationally desirable that such functions are exactly steerable. However, this requires that 
+Analytic signals provide a powerful framework for the extraction of local properties of signals. Quadrature filters that give Hilbert transforms of signals are essential to these calculations, and several methods have been proposed to extend the Hilbert transform to higher dimensions \cite{boukerroui2004choice}. Of these, methods for two-dimensional signal via the use of steerable filters to combine information about images at various orientations have been proposed to preserve the isotropy property, necessary to obtain invariance of the measure of the impulse of the local signal under rotation. \\
+However, three-dimensional filters remain technically difficult. Since quadrature filters are often represented as two real filters - it is invaluable to be able to construct two filters that are harmonic conjugates of each other. In a three-dimensional sense, these filters must agree on a certain domain and differ by only a sign on the complement. Additionally, it would be computationally desirable to demand that such filter pairs are steerable. \\
+A fast method of computing steering coefficients of axially symmetric functions is known \cite{derpanis2005three}. We therefore desire a pair of axially symmetric functions $f_e, f_o$ such that $f_e$ is symmetric over the $xy$-plane and $f_o$ is anti-symmetric over the $xy$-plane, and such that $|f_e-f_o|$ is close to 0 on the upper hemisphere. In particular, these functions are radial-angular separable and their sign depends only on the angular part, which will in fact be a polynomial of $\cos \theta$. \\
+Thus it is natural to attempt to find pairs of polynomials $p_e, p_o$ such that on the interval $[0,1]$, $(p_e-p_o)^2$ is minimized, and such that $p_e(0)=p_o(0)=0, p_e(1)=p_o(1)=1$. This problem can be framed as a quadratic programming problem and as it involves only convex optimization, has a guaranteed optimum. However, it is not obvious what other properties of the polynomials would be guaranteed. We do not know, for example, if the polynomials will be guaranteed to be monotonic or even positive, two essential properties for constructing useful filters that would approximate, for example, a Gabor transform. Furthermore, it is unclear how the polynomial solutions would behave as we allow the bandwidth to go to infinity: would the error in harmonic conjugacy - the difference $(p_e-p_o)^2$ indeed vanish? Do the polynomials converge pointwise to functions concentrated at the endpoint 1? \\
+In this manuscript, we show that our optimization problem is intimately connected to the inverse of generalized Hilbert matrices. Using well-known and newly proven properties of these Hilbert matrices, we prove desirable qualities of the polynomial pairs that can be used to construct three-dimensional analogues of steerable filter pairs in quadrature. 
 
 \subsection{The quadratic optimization problem}
 \label{problem}
@@ -215,6 +215,8 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
  &= \label{entries-combinatorial-form} (-1)^{i+j} (p+i+j-1) \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
 \end{align}
 \end{prop}
+\begin{proof} See \cite{collar1940reciprocation}
+\end{proof}
 
 \begin{prop}\label{inverse-hilbert-matrix-row}
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Fix some $i \in \{1,...,N\}$. Then the sum of the entries of row $i$ is given by: 
@@ -223,6 +225,8 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 &= (-1)^{N+i} i \dbinom{N-1+p+i}{N} \dbinom{N}{i} \label{sum-of-row-combinatorial-form}
 \end{align}
 \end{prop}
+\begin{proof} See \cite{smith1959inversion}
+\end{proof}
 
 \begin{prop}\label{inverse-hilbert-matrix-total} 
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the sum of entry of the matrix is given by:
@@ -230,7 +234,8 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 \sum_{i,j=1}^N G_{ij} = N(p+N).
 \end{equation}
 \end{prop} 
-A note on source: The equation \ref{entries} is given in (Collar, "On the Reciprocation of Certain Matrices"). The equations \ref{sum-of-row}, \ref{total-sum} are given in (Smith, "Two Theorems on Inverses of Finite Segments of the Generalized Hilbert Matrix). The alternate expressions \ref{entries-combinatorial-form}, \ref{sum-of-row-combinatorial-form} are easily verified. 
+\begin{proof} See \cite{smith1959inversion}
+\end{proof}
 
 \subsection{Notes on magnitudes and signs of important sums}
 \begin{cor}
@@ -502,33 +507,8 @@ as needed.
 
 
 \bibliographystyle{unsrt}  
-%\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
-%%% and comment out the ``thebibliography'' section.
+\bibliography{references}  
 
-
-%%% Comment out this section when you \bibliography{references} is enabled.
-\begin{thebibliography}{1}
-
-\bibitem{kour2014real}
-George Kour and Raid Saabne.
-\newblock Real-time segmentation of on-line handwritten arabic script.
-\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-  International Conference on}, pages 417--422. IEEE, 2014.
-
-\bibitem{kour2014fast}
-George Kour and Raid Saabne.
-\newblock Fast classification of handwritten on-line arabic characters.
-\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-  International Conference of}, pages 312--318. IEEE, 2014.
-
-\bibitem{hadash2018estimate}
-Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-  Jacovi.
-\newblock Estimate and replace: A novel approach to integrating deep neural
-  networks with existing applications.
-\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-\end{thebibliography}
 
 
 \end{document}

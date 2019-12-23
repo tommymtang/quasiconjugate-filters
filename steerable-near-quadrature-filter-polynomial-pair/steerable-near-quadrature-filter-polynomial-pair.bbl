@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{boukerroui2004choice}
+Djamal Boukerroui, J~Alison Noble, and Michael Brady.
+\newblock On the choice of band-pass quadrature filters.
+\newblock {\em Journal of Mathematical Imaging and Vision}, 21(1-2):53--80,
+  2004.
+
+\bibitem{derpanis2005three}
+Konstantinos~G Derpanis and Jacob~M Gryn.
+\newblock Three-dimensional nth derivative of gaussian separable steerable
+  filters.
+\newblock In {\em IEEE International Conference on Image Processing 2005},
+  volume~3, pages III--553. IEEE, 2005.
+
+\bibitem{collar1940reciprocation}
+A.~R. Collar.
+\newblock Xix.---on the reciprocation of certain matrices.
+\newblock {\em Proceedings of the Royal Society of Edinburgh}, 59:195--206,
+  1940.
+
+\bibitem{smith1959inversion}
+Richard~B. Smith.
+\newblock Two theorems on inverses of finite segments of the generalized
+  hilbert matrix.
+\newblock {\em Mathematical Tables and Other Aids to Computation},
+  13(65):41--43, 1959.
+
+\end{thebibliography}
