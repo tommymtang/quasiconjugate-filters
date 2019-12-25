@@ -12,6 +12,7 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}		% Can be removed after putting your text content
+\usepackage{verbatim} %For \comment environment
 
 \usepackage[english]{babel}  % english
 \usepackage{amsmath,amsthm,amssymb}% for theorems
@@ -57,6 +58,13 @@
   New Haven, 06510 \\
   \texttt{tommymtang@gmail.com} \\
   %% examples of more authors
+  \And 
+  Jose L. Vilas-Prieto\\
+   Department of Radiology and Biomedical Imaging\\
+  Yale University\\
+   300 Cedar St, New Haven\\
+  New Haven, 06510 \\
+  \texttt{joseluis.vilas-prieto@yale.edu} \\
    \And
  Hemant D. Tagare \thanks{also Department of Biomedical Engineering, Electrical Engineering, Statistics and Data Science} \\
  Department of Radiology and Biomedical Imaging\\
@@ -102,7 +110,7 @@ For the construction of axially symmetric three-dimensional filters pairs to app
 
 \section{Introduction}
 \label{Introduction}
-In this section we give the application motives for our results. We introduce the need to approximately represent quadrature filters using near-conjugate filters and explore briefly certain sufficient conditions for steerability. We precisely define our optimization problem in terms of an odd and even polynomial pair under a bandwidth N, and finally reformulate our problem in vectorized form using generalized Hilbert matrices, which is the line of thinking we will adopt for the rest of the paper. 
+In this section we give the application motives for our results. We introduce the need to approximately represent quadrature filters using near-conjugate filters and explore briefly certain sufficient conditions for steerability. We precisely define our optimization problem in terms of an odd and even polynomial pair under a bandwidth N, and finally reformulate our problem in vectorized form using generalized Hilbert matrices, the mode of the problem we will primarily work in.
 \subsection{Motivation}
 Analytic signals provide a powerful framework for the extraction of local properties of signals. Quadrature filters that give Hilbert transforms of signals are essential to these calculations, and several methods have been proposed to extend the Hilbert transform to higher dimensions \cite{boukerroui2004choice}. Of these, methods for two-dimensional signal via the use of steerable filters to combine information about images at various orientations have been proposed to preserve the isotropy property, necessary to obtain invariance of the measure of the impulse of the local signal under rotation. \\
 However, three-dimensional filters remain technically difficult. Since quadrature filters are often represented as two real filters - it is invaluable to be able to construct two filters that are harmonic conjugates of each other. In a three-dimensional sense, these filters must agree on a certain domain and differ by only a sign on the complement. Additionally, it would be computationally desirable to demand that such filter pairs are steerable. \\
@@ -115,7 +123,7 @@ In this manuscript, we show that our optimization problem is intimately connecte
 
 We now formulate the problem precisely. We are interested in quasiconjugate, radial-angular separable, exactly steerable functions of $\mathbb{R}^3$. That is, we consider functions of the type $f_e = W(r)p_e(\cos \theta)$ and $f_o = W(r)p_o(\cos \theta)$ where $p_e, p_o$ are axially symmetric about the north pole and positive and approximately identical on the upper half sphere. \\
 
-We can think of $p_e, p_o$ as functions of $K/G/K$ where $G=SO(3)$ and $K$ is an embedding of $SO(2)$. In particular, they are functions of the altitude on the sphere and we can thus consider them as functions of $\cos \theta$, ranging from $-1$ to $1$. When $p_e, p_o$ are polynomials, the functions $f_e, f_o$ are steerable with respect to $SO(3)$ and moreover the steering coefficients and closed forms of integrals over a shell are well-known. 
+We can think of $p_e, p_o$ as functions of $K/G/K$ where $G=SO(3)$ and $K$ is an embedding of $SO(2)$. In particular, they are functions of the altitude on the sphere and we can thus consider them as functions of $\cos \theta$, ranging from $-1$ to $1$. When $p_e, p_o$ are polynomials, the functions $f_e, f_o$ are steerable with respect to $SO(3)$ and moreover the steering coefficients are quickly computed. Thus it is possible to compute the integral of a convolution with these functions over different orientations in a closed form.
 
 We desire that both $p_e$ and $p_o$ are zero at the equator and 1 at the poles. We hope to show that if we simply minimize the integral of their difference over the upper half sphere, we may be guaranteed solutions that exhibit certain desirable properties such as positivity, monotonicity, and concentration. \\
 
@@ -124,7 +132,7 @@ Let us fix a maximum bandwidth $N$ - this is the maximum degree allowed in our p
 &\int_0^{\pi/2} (p_e(\cos\theta) - p_o(\cos\theta))^2 \sin\theta d\theta\\ \label{quasiconjugacy-poly-formulation}
 &= \int_0^1 (p_e(z) - p_o(z))^2 dz
 \end{align}
-under the constraint that $p_e(0)=p_o(0) = 0$ and $p_e(1) = p_o(1) = 1$. The integral in $\ref{quasiconjugacy-poly-formulation}$ can be computed more explicitly and written in a vectorized form. \\
+under the constraint that $p_e(0)=p_o(0) = 0$ and $p_e(1) = p_o(1) = 1$. The integral in (\ref{quasiconjugacy-poly-formulation}) can be computed more explicitly and written in a vectorized form. \\
 Let $p(z) = a_Nz^N + a_{N-1}z^{N-1} + ... + a_0 = p_e(z) - p_o(z)$. Note that the coefficients of $p$ correspond in a straightforward way to $p_e$, $p_o$, with the mere modification of sign in $p_o$. We require $p(0) = 0$, $p(1) = 1$. Note that $p(0)=0$ implies that $a_0 = 0$. Therefore, we may let  $a\in \mathbb{R}^N$ with $a(i) = a_i$ in $p$. Then our problem can be rewritten as: 
 
 \begin{align*}
@@ -145,11 +153,11 @@ $H_{ij} = \frac{1}{i+j-1+p}$
 We now reformulate our problem. 
 \begin{prob}\label{quad-prog-problem}
 Let $H$ be a generalized Hilbert matrix of size $N$, and $B = \begin{pmatrix} 1 & 0 & \cdots & 0 \\
-0 & 1 & \cdots & 1\end{pmatrix} ^T \in M_{N\times 2}\mathbb{R}$. We must solve the quadratic programming problem: 
+0 & 1 & \cdots & 1\end{pmatrix} ^T \in M_{N\times 2}(\mathbb{R}$). We must solve the quadratic programming problem: 
 \begin{equation}\label{constrained-objective-function}
 \hat{a}= \argmin_{a\in\mathbb{R}^N} \frac{1}{2} a^THa : \qquad B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix}
-\end{equation} Sometimes when $N$ is understood we will omit it from notation. The vector $\hat{a}$ corresponds canonically to a polynomial $p_{\hat{a}} = \hat{a}(N) x^N + \cdots + \hat{a}(1) x$ and naturally to a odd-even polynomial pair $p_{e, \hat{a}}, p_{o, \hat{a}}$ $p_{e,\hat{a}}$ consists of the even degree monomials of $p_{\hat{a}}$ and $p_{o, \hat{a}}$ is $-1$ times the odd degree monomials of $p_{\hat{a}}$. \\
-Note that the solution $\hat{a}$ and the induced polynomials $p_{\hat{a}}, p_{o, \hat{a}}, p_{e,\hat{e}}$ are determined entirely by our choice of maximum bandwidth $N$. Therefore, since our optimization problem is clear throughout this document, we will refer to the solution of $\hat{a}$ for bandwidth (maximum degree allowed) $N$ as \emph{the optimal coefficients vector $\hat{a}$ of degree $N$}, denoted as $\hat{a}^{(N)}$, and similarly the polynomials that are induced by $\hat{a}^(N)$ as the \emph{optimal polynomials or optimal polynomial pairs of degree $N$}, denoted as $p_{\hat{a}}^{(N)}$, $p_{\hat{a}_e}^{(N)}$, $p_{\hat{a}_o}^{(N)}$. 
+\end{equation} The solution $\hat{a}$ is determined uniquely by the choice of bandwidth $N$. Thus we will refer to the solution to the optimization problem with dimension $N$ as  \emph{the optimal coefficients vector $\hat{a}$ of degree $N$} and denote it $\hat{a}^{(N)}$. Sometimes when $N$ is understood we will omit it from notation. The vector $\hat{a}$ corresponds canonically to a polynomial $p_{\hat{a}} = \hat{a}(N) x^N + \cdots + \hat{a}(1) x$ and naturally to a odd-even polynomial pair $p_{e, \hat{a}}, p_{o, \hat{a}}$ $p_{e,\hat{a}}$ consists of the even degree monomials of $p_{\hat{a}}$ and $p_{o, \hat{a}}$ is $-1$ times the odd degree monomials of $p_{\hat{a}}$. \\
+When necessary, we will refer to these polynomials as solutions of the optimization problem with a particular bandwidth. We will refer to the polynomials that are induced by $\hat{a}^(N)$ as the \emph{optimal polynomials or optimal polynomial pairs of degree $N$}, denoted as $p_{\hat{a}}^{(N)}$, $p_{\hat{a}_e}^{(N)}$, $p_{\hat{a}_o}^{(N)}$. 
 We will show the following three properties: 
 \begin{enumerate}
 \item For every $N$, the entries of $\hat{a}^{(N))}$ are alternating in sign, with $\hat{a}(1) = -1$. This is equivalent to the fact that the optimal polynomial pairs have only positive coefficients.
@@ -166,10 +174,10 @@ Since the objective function associated with this Lagrangian is clearly convex a
 Note that $\frac{\partial L'(a^*,\lambda^*)}{\partial a} = \frac{\partial L(a^*, -\lambda^*)}{\partial a}$, and $\frac{\partial L'(a^*,\lambda^*)}{\partial \lambda} = -\frac{\partial L(a^*, -\lambda^*)}{\partial \lambda}$, so if both partials of $L'$ are zero at $(a^*, \lambda^*)$, then both partials of $L$ are zero at $(a^*, -\lambda^*)$. Thus we must simply find the values of $\lambda, a$ such that the partials of $L'$ are zero. \\
 
 Now, taking the derivative with respect to $a$, we see that we must have 
-\[ a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
+\[ \hat{a} = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
 under the constraint 
 \begin{align*}
-&B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix} \\
+&B^T\hat{a} = \begin{pmatrix} -1 \\ 1 \end{pmatrix} \\
 \iff &B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} -1 \\ 1 \end{pmatrix}
 \end{align*} With the constraint above in mind, the constrained objective function can now be rewritten as 
 \begin{align*}
@@ -185,37 +193,43 @@ We see now that it will be useful to adopt some notation to refer to the inverse
 Let $G=H^{-1}$ where $H$ is a generalized Hilbert matrix of size $N$ for constant $p > 0$. Let $G_{i,j}$ denote the entries of $G$ (we write $G_{ij}$ when unambiguous). Furthermore, let 
 
 \begin{align*} 
-g^{oo} = \sum_{i,j \; \text{odd}}^N G_{i,h} \\
-g^{ee} = \sum_{i,j \; \text{even}}^N  G_{i,j} \\
-g^{oe} = \sum_{i \; \text{odd, } j \; \text{even}}^N  G_{i,j} \\
-g^{eo} = \sum_{i \; \text{even, } j \; \text{odd}}^N  G_{i,j} \\
+g^{oo} = \sum_{i,j \; \text{odd}}^N G_{i,j}, \qquad
+g^{ee} = \sum_{i,j \; \text{even}}^N  G_{i,j}, \\
+g^{oe} = \sum_{i \; \text{odd, } j \; \text{even}}^N  G_{i,j} ,\qquad
+g^{eo} = \sum_{i \; \text{even, } j \; \text{odd}}^N  G_{i,j} 
 \end{align*} be the sums of all entries of $G$ in, for example, odd-indexed rows and odd-indexed columns. Note in particular that since $H$ is symmetric, $G$ is also symmetric and therefore $g^{oe} = g^{eo}$ (when $G$ has even dimension). 
 
 Now, let $1 \le i \le N$. Then define 
 \begin{align*}
-g_i^o= \sum_{j \; \text{odd}}^N G_{i, j} \\
-g_i^e= \sum_{j \; \text{even}}^N G_{i, j} \\
-\end{align*} be the sums of entries of row $i$ in an odd-indexed (resp., even-indexed) column. Additionally, let 
-\begin{align*}
+g_i^o= \sum_{j \; \text{odd}}^N G_{i, j} ,\qquad
+g_i^e= \sum_{j \; \text{even}}^N G_{i, j} ,\qquad
 r_i=g_i = \sum_{j=1}^N G_{i,j}
-\end{align*}
+\end{align*} be sums of odd-indexed entries, the even-indexed entries, and all entries of a particular $i$-th row, respectively.\\
 Finally define 
 \begin{align*}
-g^o = \sum_{i \; \text{odd}}^N r_i\\
+g^o = \sum_{i \; \text{odd}}^N r_i, \qquad 
 g^e = \sum_{i \; \text{even}}^N r_i
-\end{align*} be the sum of all entries in odd-indexed or even-indexed rows.
+\end{align*} be the sum of all entries in odd-numbered or even-numbered rows, respectively.
 \end{defn} 
-
+\begin{defn}\label{absolute-value-sum-of-entries}
+For each definition above, we will adopt a notation to indicate its absolute value. We will let $s^o = |g^o|, s^e = |g^e|, s^e_k = |g^e_k|$, etc. In particular, note that $s_k^e + s_k^o$ is the sum of the absolute value of the entries of a particular row. These values will prove particularly useful.
+\end{defn}
 
 \subsection{Exact expression for entries and sum of entries}
+\begin{prop}\label{hilbert-matrices-are-positive-definite}
+Every generalized Hilbert matrix $H$ is positive definite. 
+\end{prop}
+\begin{proof} See \cite{collar1940reciprocation}.
+\end{proof}
+
 \begin{prop}\label{inverse-hilbert-matrix-entry}
 Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and constant $p>0$. Then the entries of $G$ are given by 
 \begin{align}\label{entries}
- G_{ij} &= \frac{(-1)^{i+j}}{p+i+j-1} \left( \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\right) \\
+ G_{ij} &= \frac{(-1)^{i+j}}{p+i+j-1} \left( \frac{\prod_{k=0}^{N-1} (p+i+k)(p+j+k)}{(i-1)! (N-i)! (j-1)! (N-j)!}\right) \\ 
  &= \label{entries-combinatorial-form} (-1)^{i+j} (p+i+j-1) \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
 \end{align}
 \end{prop}
-\begin{proof} See \cite{collar1940reciprocation}
+\begin{proof} See \cite{collar1940reciprocation}.
 \end{proof}
 
 \begin{prop}\label{inverse-hilbert-matrix-row}
@@ -225,7 +239,7 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 &= (-1)^{N+i} i \dbinom{N-1+p+i}{N} \dbinom{N}{i} \label{sum-of-row-combinatorial-form}
 \end{align}
 \end{prop}
-\begin{proof} See \cite{smith1959inversion}
+\begin{proof} See \cite{smith1959inversion}.
 \end{proof}
 
 \begin{prop}\label{inverse-hilbert-matrix-total} 
@@ -234,7 +248,17 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 \sum_{i,j=1}^N G_{ij} = N(p+N).
 \end{equation}
 \end{prop} 
-\begin{proof} See \cite{smith1959inversion}
+\begin{proof} See \cite{smith1959inversion}.
+\end{proof}
+
+\begin{cor}\label{row-product} We obtain the following expression for products of rows:
+\begin{align*}
+r_ir_j &= (p+i+j-1) G_{ij} \\
+&= (-1)^{i+j}(p+i+j-1)^2 \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
+\end{align*}
+\end{cor}
+
+\begin{proof} The first equality follows quickly from comparing the expressions of (\ref{entries}), (\ref{sum-of-row}), and the second comes from applying the combinatorial form given in (\ref{entries-combinatorial-form}).
 \end{proof}
 
 \subsection{Notes on magnitudes and signs of important sums}
@@ -242,7 +266,7 @@ Let $G=H^{-1}$ be the inverse of a generalized Hilbert matrix of size $N$ and co
 Let $N$ be even. Then for every $k$,  $|g_k^o| < |g_k^e|$. Furthermore $|g^{oo}| < |g^{oe}|$ and $|g^{eo}| < |g^{ee}|$.  If $N$ is odd then the inequalities are reversed. 
 \end{cor}
 \begin{proof}
-This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilbert-matrix-entry}
+This follows quickly from \ref{inverse-hilbert-matrix-row} and \ref{inverse-hilbert-matrix-entry}.
 \end{proof}
 
 \begin{cor}
@@ -250,11 +274,11 @@ Let $N$ be even. Then $g^o < 0 < g^e$. If $N$ is odd then the inequalities are r
 \end{cor}
 
 \begin{prop}\label{inverse-determinant-is-positive}
-$\lambda_G$ as defined earlier is positive.
+The quantity $g^{oo}g^{ee} - g^{oe}g^{eo}$ is positive.
 \end{prop}
 \begin{proof}
-First, note that $H$ is positive definite, and therefore $G=H^{-1}$ is positive definite. Thus, for any $x= \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \in \mathbb{R}^2$, $x^T B^TGBx = (x_1 x_2 \cdots x_2) G \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_2 \end{pmatrix} > 0$ when $x$ is not identically zero. (More to the point, $B$ has full column rank). \\
-Thus $B^TGB \in M_2(\mathbb{R})$ with positive determinant. Since $\lambda_G = \frac{1}{\det B^TG B} >0 $ as needed.
+Note that our quantity $g^{oo}g^{ee} - g^{oe}g^{eo}$ is the determinant of the matrix $B^TH^{-1}B = \begin{pmatrix} g^{oo} & g^{oe} \\ g^{eo} & g^{ee} \end{pmatrix}$. Furthermore, since $H$ is positive definite, $G=H^{-1}$ is positive definite. Thus, for any $x= \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \in \mathbb{R}^2$, $x^T B^TGBx = (x_1 x_2 \cdots x_2) G \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_2 \end{pmatrix} > 0$ when $x$ is not identically zero. (More to the point, $B$ has full column rank). \\
+Thus $B^TGB$ is positive definite and $\det B^TGB = g^{oo}g^{ee} - g^{oe}g^{eo}$ is positive. 
 \end{proof}
 
 \section{Theorems and Results}
@@ -263,66 +287,58 @@ Thus $B^TGB \in M_2(\mathbb{R})$ with positive determinant. Since $\lambda_G = \
 \begin{thm}\label{positivity-hilbert-coefficients}
 Let $H$ be a generalized Hilbert matrix of size $N$ and $B \in M_{N\times 2}$ is as above. Furthermore, let 
 \[ \hat{a} = \argmin_{a\in\mathbb{R}^N} \quad \quad a^THa : \quad B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix}\]
-Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
+be the optimal vector of coefficients. Then for odd $i$, $\hat{a}(i) < 0$ and for even $i$ $\hat{a}(i) > 0$.
 \end{thm} 
 
-Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In the succeeding theorems we show an equivalent result that we will prove, as well as properties of generalized Hilbert matrices that are key elements for the proof. We inherit the notation of Section \ref{Introduction}.
+Our goal is to prove Theorem \ref{positivity-hilbert-coefficients}. In the succeeding theorems we show an equivalent result that we will prove. But first we will rewrite our expressions for the solution further. Recall that we have \[ \hat{a} = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = H^{-1} \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix},\]
+under the constraint 
+\begin{align}
+& B^T H^{-1} B \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} -1 \\ 1 \end{pmatrix} \\
+\iff &  \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix}  = \frac{1}{g^{oo}g^{ee}-g^{oe}g^{eo}} \begin{pmatrix} g^{ee} & -g^{oe} \\ -g^{eo} & g^{oo} \end{pmatrix} \begin{pmatrix} -1 \\ 1 \end{pmatrix} \\
+\iff & \begin{pmatrix}\lambda_1 \\ \lambda_2 \end{pmatrix}  = \frac{1}{g^{oo}g^{ee}-g^{oe}g^{eo}} \begin{pmatrix} -g^{ee} - g^{oe} \\ g^{eo} + g^{oo} \end{pmatrix} =\frac{1}{g^{oo}g^{ee}-g^{oe}g^{eo}} \begin{pmatrix} -g^e \\ g^o \end{pmatrix} \label{lambda-expression}
+\end{align}
 
-\begin{thm}\label{ratio-of-sums-equivalent-theorem}
-Let $G=H^{-1}$ be the inverse of a Hilbert matrix of dimension $N$ even, and define $g^{oo}, etc., g^{o}_i, etc., s^{oo}$, etc. as above. Then for any $1 \le i \le N$
-\begin{equation}\label{ratio-of-sums}
-\frac{s^o}{s^e} < \frac{s_i^o}{s_i^e}
-\end{equation} If $N$ is odd, then the inequality is reversed. 
-\end{thm}
+\begin{prop}\label{ratio-inequality-is-equivalent-to-main-theorem}
+Let $s^o, s^e, s^o_k, s^e_k$ as in Definition \ref{absolute-value-sum-of-entries}. Furthermore, if $N$ is even, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_k^+ = s_k^o + s_k^e$ and $s_k^- = s_k^e- s_k^o$. Otherwise, let $s^- = s^o - s^e, s_k^- = s_k^o - s_k^e$. Then: 
+\begin{enumerate}
+\item \begin{equation}\label{ratio-of-absolute-difference-inequality}
+\frac{s^+}{s^-} < \frac{s_k^+}{s_k^-} 
+\end{equation}
 
-\begin{prop}\label{ratio-of-sums-is-equivalent-to-positivity-of-coefficients}
-Let $G=H^{-1}$ be a matrix of dimension $N$, and define sums of rows, etc. as $s^{o}$ as above such that \ref{ratio-of-sums} is satisfied (or if $N$ is odd, then the reversed inequality). Then let $a = H^{-1} B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ where $\lambda_1, \lambda_2$ are defined as in Section \ref{Introduction}. Then $a$ is alternating in sign with the first element negative. 
+\item Inequality \ref{ratio-of-absolute-difference-inequality} implies our Theorem \ref{positivity-hilbert-coefficients}.
+\end{enumerate}
 \end{prop}
-
-
+Note that our $s_k^+$ are simply defined to be the of the sum of the absolute of even-indexed and odd-indexed values, and the $s_k^-$ to be the absolute value of the sum of the even-indexed and odd-indexed values, respectively. Both $s^-$ and $s_k^-$ are familiar values - modulo an absolute value sign, they are simply the sum of entries in a row, and the total sum of all elements. The $s^+, s_k^+$ values are meant to be an absolute value analog, achieving far larger magnitudes. The point of Proposition \ref{ratio-inequality-is-equivalent-to-main-theorem} is to compare ratios of these magnitudes and relate them directly to the coefficients of our optimal vector $\hat{a}$.
 \begin{proof}
-From the previous section we have 
-\[\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \lambda_G \begin{pmatrix} -g^e \\ g^o \end{pmatrix}.\]
-Now since $B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}$, the $k$th element of $a$ is given by 
-\begin{equation}\label{ratio-linear-combination} \lambda_1 g_k^o + \lambda_2 g_k^e \end{equation}
-
-First, suppose $N$ is even and consider odd $k$. Expression \ref{ratio-linear-combination} is negative if \begin{align*}
-&\lambda_1 g_k^o + \lambda_2 g_k^e < 0\\
-\iff & \lambda_G(-g^e g_k^o + g^o g_k^e) < 0 \\
-\iff & g^eg_k^o > g^og_k^e\\
-\iff & \frac{g_k^o}{g_k^e} < \frac{g^o}{g^e}
-\end{align*} where we take care to note that $g_k^e$ is negative when $k$ is odd. On the other hand, if $k$ is even we need
+We will first show that Inequality \ref{ratio-of-absolute-difference-inequality} implies our Theorem \ref{positivity-hilbert-coefficients}.\\
+First, consider even $N$. Note 
 \begin{align*}
-&\lambda_1 g_k^o + \lambda_2 g_k^e > 0\\
-\iff & \lambda_G(-g^e g_k^o + g^o g_k^e) > 0 \\
-\iff & g^og_k^e > g^eg_k^o\\
-\iff & \frac{g^o}{g^e} > \frac{g^o_k}{g^e_k}
-\end{align*} as before, where here we used the fact that both $g^e$ and $g^e_k$ are positive.  Now, regardless of parity, on either side of the inequality we have one term in the fraction negative. We must always have one of $g^o_k, g^e_k$ negative, and $g^o$ is always negative, so taking absolute values of all terms, we are multiplying both side by negative 1 and thus obtain: 
-\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}\]
-\end{proof}
-
-Essentially, Proposition \ref{ratio-of-sums-is-equivalent-to-positivity-of-coefficients} states that Theorem \ref{ratio-of-sums-equivalent-theorem} our main Theorem \ref{positivity-hilbert-coefficients}.
-
-\begin{thm}\label{ratio-of-absolute-difference-theorem}
-Let $G=H^{-1}$ be the inverse of a Hilbert matrix of dimension $N$, and define $g^{oo}, g_i^o, s^o, etc.$ as previously. If $N$ is even, let $s^+ = s^o + s^e$, $s^- = s^e-s^o$, and for any $i\in \{1,...,N\}$, let $s_i^+ = s_i^o + s_i^e$ and $s_i^- = s_i^e- s_i^o$. Otherwise, let $s^- = s^o - s^e, s_i^- = s_i^o - s_i^e$. Then:
-
-\begin{equation}\label{ratio-of-absolute-difference-inequality}
-\frac{s^+}{s^-} < \frac{s_i^+}{s_i^-} 
-\end{equation} Furthermore, this is equivalent to 
-\[ \frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}, \qquad \text{for N even} \]
-\[ \frac{s^o}{s^e} > \frac{s^o_k}{s^e_k}, \qquad \text{for N odd} \]
-\end{thm}  We choose to work with this ratio as opposed to the one in \ref{ratio-of-sums} because the differences between the two are magnified, giving us a larger room for error. The manipulations to achieve the inequality are thus more conveniently derived. 
-\begin{proof}
-We first prove equivalence of the theorems, focusing on even $N$. The odd case is analagous. Note 
-\begin{align*}
-&\frac{s^o}{s^e} < \frac{s^o_k}{s^e_k} \\
-\iff & \frac{s^+ - s^-}{s^+ +s^-} <\frac{s^+_k - s^-_k}{s^+_k +s^-_k} \\
-\iff& \frac{1-s^-/s^+}{1+s^-/s^+} < \frac{1-s^-_k /s^+_k}{1+s^-_k/s^+_k} \\
+& \frac{s^+}{s^-} < \frac{s_k^+}{s_k^-}\\
 \iff & \frac{s^-}{s^+} > \frac{s^-_k}{s^+_k}\\
-\iff & \frac{s^+}{s^-} < \frac{s_i^+}{s_i^-}
-\end{align*} where we have taken advantage of the fact that $0<\frac{s^-}{s^+}, \frac{s^-_k}{s^+_k}<1$.
+\iff& \frac{1-s^-/s^+}{1+s^-/s^+} < \frac{1-s^-_k /s^+_k}{1+s^-_k/s^+_k} \\
+\iff & \frac{s^+ - s^-}{s^+ +s^-} <\frac{s^+_k - s^-_k}{s^+_k +s^-_k} \\
+\iff&\frac{s^o}{s^e} < \frac{s^o_k}{s^e_k} 
+\end{align*} where we have taken advantage of the fact that $0<\frac{s^-}{s^+}, \frac{s^-_k}{s^+_k}<1$. The inequality at the end is reversed for odd $N$. Now, let $k <N$ be the index of any row. Then the expressions $\frac{g^o}{g^e}, \frac{g^o_k}{g^e_k}$ must contain exactly one negative entry in each fraction, and thus our inequality $\frac{s^o}{s^e} < \frac{s^o_k}{s^e_k}$ is equivalent to $\frac{g^o}{g^e} > \frac{g^o_k}{g^e_k}$. (The inequality is reversed for odd $N$). If $N$ is even, then $g^e$ is positive; otherwise $g^o$ is negative. In either case, if $k$ is even, our previous inequality is equivalent to 
+\begin{align}
+&g^og^e_k > g^eg^o_k \\
+\iff & (g^{oo}g^{ee} - g^{oe}g^{eo})^{-1}(-g^eg^o_k+g^og^e_k)>0 \\
+\iff& \lambda_1 g^o_k + \lambda_2 g^e_k >0 \label{even-lambda-inequality}
+\end{align}
+by (\ref{lambda-expression}). If $k$ is odd, this inequality is 
+\begin{equation}\label{odd-lambda-inequality} \lambda_1 g^o_k + \lambda_2 g^e_k <0 \end{equation}
+But $B \begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix} = \begin{pmatrix} \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_2 \end{pmatrix}$, so the $k$th element of $a$ is given by 
+\begin{equation}\label{ratio-linear-combination} \lambda_1 g_k^o + \lambda_2 g_k^e \end{equation} so in fact our two inequalities (\ref{even-lambda-inequality}), (\ref{odd-lambda-inequality}) together give the statement of our main Theorem \ref{positivity-hilbert-coefficients}.
 
-Now onto the inequality. We write down two lemmas on binomial coefficients that will prove useful. Both are well-known and easily verified.
+Now onto the inequality. We can rewrite the inequality (\ref{ratio-of-absolute-difference-inequality}) as: 
+\begin{align*}
+&\frac{s^+}{s^-} < \frac{s_i^+}{s_i^-} \\
+\iff & \frac{\sum_{i=1}^N |r_i|}{\sum_{i=1}^N r_i} < \frac{\sum_{j=1}^N |G_{kj}|}{\left | \sum_{j=1}^N G_{kj} \right|}\\
+\iff & \frac{\sum_{i=1}^N |r_i |}{ N(p+N)} < \frac{\sum_{j=1}^N |G_{kj}|}{|r_k|}\\
+\iff & |r_k| \sum_{i=1}^N |r_i| < N(p+N) \sum_{j=1}^N |G_{kj}|\\
+\iff & \sum_{i=1}^N (p+i+j-1) |G_{kj}| < N(p+N) \sum_{j=1}^N |G_{kj}|
+\end{align*} But $p+i+j-1 < 2N-1+p$. $N^2 > 2N-1$ when $N$ is at least 2, and $Np>p$ when $N>1$, and thus we see that our theorem is proven.
+% begin loooooooonnggggg comment
+\begin{comment}We write down two lemmas on binomial coefficients that will prove useful. Both are well-known and easily verified.
 \begin{lem}\label{absorption-combination}
 Let $N>j>0$. Then 
 \[ j \dbinom{N}{j} = j \dbinom{N}{N-j} = N \dbinom{N-1}{j-1}\]
@@ -364,6 +380,8 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 \begin{align*}
 \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j} \frac{j}{p+j+N-1} > \sum_{j=1}^N \dbinom{N+p+j-1}{N} \dbinom{N}{j}\frac{1}{p+N}
 \end{align*} since the fraction $\frac{j}{p+j+N-1}$ is increasing in $j$ because both $j$ and $p+N-1$ positive.
+\end{comment}
+% end loooooooonnggggg comment
 \end{proof}
 
 
@@ -371,13 +389,12 @@ k \dbinom{N-1+p+k}{N}\dbinom{N}{k} &= N \dbinom{N-1+p+k}{N}\dbinom{N-1}{k-1} \\
 We now show that not only does this optimization of quasi-conjugate polynomial pairs give us well-behaved polynomials with positive coefficients, but also that our quadrature loss vanishes as the maximal degree allowed $N$ is increased. 
 
 \begin{thm}
-Let $a^* = \argmin_{a\in\mathbb{R}^N} \frac{1}{2} a^T H a, \quad B^Ta = \begin{pmatrix} -1 \\ 1 \end{pmatrix}$ where $B$ is the $N$ by 2 matrix of alternating 1s and 0s as before. Define $f(N) = \frac{1}{2}(a^*)^T H a^*$ the minimum for the objective function achieved for dimension $N$. Then $f(N) \to 0$ as $N\to \infty$.
+Let $\hat{a}^{(N)}$ denote the optimal vector of coefficients pertaining to the optimization problem of dimension $N$. Then the objective function loss $\frac{1}{2}(\hat{a}^{(N)})^T H \hat{a}^{(N)} \to 0$ as $N\to \infty$.
 \end{thm}
 \begin{proof}
-Abusing notation, we will simply write $a$ as the optimal vector of coefficients. We proceed to by deriving an alternative expression for the objective function using our previous results and then prove some facts about the growth. Now, we have
+Let us fix some $N$ and simply write $\hat{a}$ as the corresponding solution. We proceed by deriving an alternative expression for the objective function using our previous results and then prove some facts about the growth.Recall
 \begin{align*}
-\frac{1}{2}a^T Ha &= \frac{1}{2}(H^{-1}B \lambda)^TH(H^{-1}B \lambda) \\
-&= \frac{1}{2} \lambda^T B^T H^{-1}B \lambda \\
+\frac{1}{2}a^T Ha &=\frac{1}{2} \lambda^T B^T H^{-1}B \lambda \\
 &= \frac{1}{2} \lambda^T K\lambda, \quad \text{where } K= \begin{pmatrix} g^{oo} & g^{oe} \\
 g^{eo} & g^{ee} \end{pmatrix}.
 \end{align*} But $\lambda = K^{-1} \begin{pmatrix} -1 \\ 1 \end{pmatrix} = \lambda_G \begin{pmatrix} -g^e \\ g^o \end{pmatrix}$, where $\lambda_G = \frac{1}{g^{oo} g^{ee} - g^{eo}g^{oe}} >0$, so noting the symmetry of $K$, we have 
@@ -441,11 +458,11 @@ as needed.
 
 Now we prove a lemma on the coefficients of our optimally obtained vector $\hat{a}$.
 \begin{lem}\label{coefficients-vanish}
-Let $\hat{a}(N)$ denote the optimal $a$ obtained from the optimization problem \ref{positivity-hilbert-coefficients} of dimension $N$, and $\hat{a}(N,k)$ its $k$-th coefficient. Now, fix $k$. Then, $\hat{a}(N,k) \to 0$ as $N\to \infty$.
+Let $\hat{a}^{(N)}$ denote the optimal vector of coefficients of dimension $N$, and $\hat{a}^{(N)}(k)$ its $k$-th coefficient. Now, fix $k$. Then, $\hat{a}^{(N)}(k) \to 0$ as $N\to \infty$.
 \end{lem}
 This lemma states that any fixed coefficient goes to 0 in our sequence of optimal vectors $\hat{a}$. We will exploit the fact that $x^m$ decreases with $m$ when $0<x<1$ to use this lemma in our main proposition. 
 \begin{proof}
-We will abuse notation slightly and occasionally write variables down without specifying $N$. Now, recall from earlier that $a_k$ is given by an expression containing values determined by sums of specific coefficients of the generalized Hilbert matrix (of order $p=2$). In particular, we have 
+Recall from earlier that $a_k$ is given by:
 \begin{align}
 a_{k} &= \lambda_1 g_k^o + \lambda_2g^e_k \\
 &= \lambda_G(-g^eg_k^o + g^og_k^e) \\
@@ -453,12 +470,7 @@ a_{k} &= \lambda_1 g_k^o + \lambda_2g^e_k \\
 \end{align}
 Recall that we may write our denominator
 \[g^{oo} g^{ee}-(g^{oe})^2 = N(p+N)g^{oo} - d^2 \]
-where $d$ was the absolute value of the sums of all elements in all odd rows. Denote $r_k = g_k^o + g_k^e$ be the sum of all elements of a row. It is easy to verify that for any $i,j$, we may write
-\begin{align*}
-r_ir_j &= (p+i+j-1) G_{ij} \\
-&= (-1)^{i+j}(p+i+j-1)^2 \dbinom{N+p+i-1}{N-j} \dbinom{N+p+j-1}{N-i} \dbinom{p+i+j-2}{i-1} \dbinom{p+i+j-2}{j-1}
-\end{align*}
-Now with this last equation we may rewrite the denominator of \ref{coefficient-ratio-form} as:
+where $d$ was the absolute value of the sums of all elements in all odd rows. Using Corollary \ref{row-product} we may rewrite the denominator of \ref{coefficient-ratio-form} as:
 \begin{align*}
 g^{oo} g^{ee}-(g^{oe})^2 &= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} r_ir_j \\
 &= N(p+N) \sum_{i,j \; \text{odd}} G_{ij} - \sum_{i,j \; \text{odd}} (p+i+j-1) G_{ij}\\
@@ -482,25 +494,24 @@ Thus from (\ref{coefficient-expanded-ratio}), we may write
 \begin{align*}
 \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{i,j \; \text{odd}}  (N(p+N) -(p+i+j-1))G_{ij}} &< \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{ \sum_{j\; \text{odd, }\; i\in K}  (N(p+N) -(p+i+j-1))G_{ij}}\\
 & < \frac{ \sum_{j\; \text{odd}} (N(p+N) -(p+k+j-1))G_{kj}}{\frac{N}{16} \sum_{j \; \text{odd}}  (N(p+N) -(p+k+j-1))G_{kj}} = \frac{16}{N}
-\end{align*} which clearly decays to 0 as $N\to \infty$. QED
+\end{align*} which clearly decays to 0 as $N\to \infty$.
 \end{proof}
 
 \begin{prop}\label{pointwise-convergence-zero-one-function}
 Let $\hat{p_N}$ be the optimal polynomial derived from the optimization problem in \ref{quasiconjugacy-poly-formulation} of dimension $N$. Let $x\in (0,1)$. Then $p_N(x) \to 0$ as $N\to \infty$. 
 \end{prop}
-This proposition essentially says that as we allow the maximum degree of our optimal polynomials to increase, the functions resemble a delta function at 1. Our proof will use the following lemma.
+This proposition says that as we increase the bandwidth of our polynomials, the optimal pairs converge to a delta function at 1.
 
 \begin{proof}
-Let $\epsilon > 0$. Denote $p_N$ the polynomial of degree $N$ obtained through our optimization, and let $a_{N,k}$ denote its $k$-th coefficient to $x^k$, where $k \le N$.\\
-First, there is some $M$ such that $x^M < \frac{\epsilon}{2}$. \\
-Moreover, by Lemma \ref{coefficients-vanish}, there is some $N$ such that $\max (a_{N,1}, a_{N,2},..., a_{N,M-1}) < \frac{\epsilon(1-x)}{2x}$. By the results of the Lemma we are guaranteed there is such a $N>M$, so that this is well-defined. Selecting such a $M, N$, let $\hat{a}(N,M) = \max (a_{N,1}, a_{N,2},..., a_{N,M-1}) $.\\
-Now,
+Let $\epsilon > 0$. 
+First, there is some $M$ such that $x^M < \frac{\epsilon}{4}$. \\
+Recall that any $\hat{a}^{(N)}$ corresponds to a pair of polynomial with coefficients $\hat{a}^{(N)}(k)$. It suffices to show that the polynomial given by $p_N(x) = \sum_{k=1}^N |\hat{a}^{(N)}(k)| x^k$ converges pointwise to 0 at every $x\neq 1$, since the optimal odd/even polynomials are bounded by this polynomial. By Lemma \ref{coefficients-vanish}, there is some $L$ such that for every $N>\max(M,L)$, $\hat{a}^(N)$ satisfies $\max (a_{N,1}, a_{N,2},..., a_{N,M-1}) < \frac{\epsilon(1-x)}{2x}$. Selecting such a $M, N$, let $c = \max (a_{N,1}, a_{N,2},..., a_{N,M-1}) $.\\
+Now, using the facts above and the fact that $\sum_{k=1}^N |\hat{a}^{(N)}(k)| = 2$,
 \begin{align*}
 p_N(x) &= \sum_{k=1}^{M-1} a_{N,k} x^k + \sum_{k=M}^N a_{N,k}x ^k\\
-&< \hat{a}(N,M) \sum_{k=1}^{M-1} x^ k + \sum_{k=M}^N a_{N,k} x^M \\
+&< c \sum_{k=1}^{M-1} x^ k + \sum_{k=M}^N a_{N,k} x^M \\
 &< \frac{\epsilon(1-x)}{2} \sum_{k=1}^\infty x^k + x^M \sum_{k=M}^N a_{N,k}\\
-& < \frac{\epsilon(1-x)}{2x} \frac{x}{1-x} + x^M \\
-&< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+& < \frac{\epsilon(1-x)}{2x} \frac{x}{1-x} + 2x^M < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
 \end{align*}
 as needed.
 \end{proof}

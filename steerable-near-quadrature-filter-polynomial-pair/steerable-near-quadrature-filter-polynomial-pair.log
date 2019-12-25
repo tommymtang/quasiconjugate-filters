@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  23 DEC 2019 15:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  24 DEC 2019 17:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -568,6 +568,12 @@ File: microtype.cfg 2016/05/14 v2.6a microtype main configuration file (RS)
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count106
 )
+(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks20
+\verbatim@line=\toks21
+\verbatim@in@stream=\read1
+)
 (/usr/local/texlive/2017/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2017/05/19 3.10 The Babel package
 
@@ -593,7 +599,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks20
+\@emptytoks=\toks22
 \ex@=\dimen130
 ))
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -623,35 +629,35 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \dotsspace@=\muskip11
 \c@parentequation=\count115
 \dspbrk@lvl=\count116
-\tag@help=\toks21
+\tag@help=\toks23
 \row@=\count117
 \column@=\count118
 \maxfields@=\count119
-\andhelp@=\toks22
+\andhelp@=\toks24
 \eqnshift@=\dimen133
 \alignsep@=\dimen134
 \tagshift@=\dimen135
 \tagwidth@=\dimen136
 \totwidth@=\dimen137
 \lineht@=\dimen138
-\@envbody=\toks23
+\@envbody=\toks25
 \multlinegap=\skip60
 \multlinetaggap=\skip61
-\mathdisplay@stack=\toks24
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2015/03/04 v2.20.2
-\thm@style=\toks25
-\thm@bodyfont=\toks26
-\thm@headfont=\toks27
-\thm@notefont=\toks28
-\thm@headpunct=\toks29
+\thm@style=\toks27
+\thm@bodyfont=\toks28
+\thm@headfont=\toks29
+\thm@notefont=\toks30
+\thm@headpunct=\toks31
 \thm@preskip=\skip62
 \thm@postskip=\skip63
 \thm@headsep=\skip64
-\dth@everypar=\toks30
+\dth@everypar=\toks32
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -662,21 +668,21 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (./steerable-near-quadrature-filter-polynomial-pair.aux)
 \openout1 = `steerable-near-quadrature-filter-polynomial-pair.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 91.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 99.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -748,7 +754,7 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box28
-Package hyperref Info: Link coloring OFF on input line 91.
+Package hyperref Info: Link coloring OFF on input line 99.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -757,16 +763,16 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count122
 )
-LaTeX Info: Redefining \ref on input line 91.
-LaTeX Info: Redefining \pageref on input line 91.
-LaTeX Info: Redefining \nameref on input line 91.
+LaTeX Info: Redefining \ref on input line 99.
+LaTeX Info: Redefining \pageref on input line 99.
+LaTeX Info: Redefining \nameref on input line 99.
 
 (./steerable-near-quadrature-filter-polynomial-pair.out)
 (./steerable-near-quadrature-filter-polynomial-pair.out)
 \@outlinefile=\write3
 \openout3 = `steerable-near-quadrature-filter-polynomial-pair.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 91.
+LaTeX Info: Redefining \microtypecontext on input line 99.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -784,7 +790,7 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 93.
+LaTeX Font Info:    Try loading font information for U+msa on input line 101.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -792,7 +798,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2017/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 93.
+LaTeX Font Info:    Try loading font information for U+msb on input line 101.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -801,8 +807,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 93.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 101.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 101.
+
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -812,70 +819,62 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 94.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 102.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <12> not available
-(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 94.
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 102.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 100.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 108.
+
+Underfull \vbox (badness 1466) has occurred while \output is active []
+
  [1
 
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5374) has occurred while \output is active []
 
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 136--137
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 165--167
+Underfull \hbox (badness 10000) in paragraph at lines 173--175
 
  []
 
-[4] [5] [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 341--342
+[4] [5] [6] [7] [8] [9] [10]
+(./steerable-near-quadrature-filter-polynomial-pair.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 525.
+ [11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 525.
 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
-Underfull \vbox (badness 3078) has occurred while \output is active []
-
- [9]
-[10] [11] [12] (./steerable-near-quadrature-filter-polynomial-pair.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 514.
-
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 514.
- (./steerable-near-quadrature-filter-polynomial-pair.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 514.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 514.
+(./steerable-near-quadrature-filter-polynomial-pair.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 525.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 525.
 Package rerunfilecheck Info: File `steerable-near-quadrature-filter-polynomial-
 pair.out' has not changed.
 (rerunfilecheck)             Checksum: 23900E5FF3AD111A4EEB8548F3E2F682;886.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 514.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 525.
  ) 
 Here is how much of TeX's memory you used:
- 8984 strings out of 492995
- 131579 string characters out of 6132704
- 363370 words of memory out of 5000000
- 12167 multiletter control sequences out of 15000+600000
- 67330 words of font info for 168 fonts, out of 8000000 for 9000
+ 9005 strings out of 492995
+ 131985 string characters out of 6132704
+ 364421 words of memory out of 5000000
+ 12187 multiletter control sequences out of 15000+600000
+ 63776 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,14n,45p,1278b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,14n,45p,1278b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/tex
 live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
@@ -896,11 +895,11 @@ dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on steerable-near-quadrature-filter-polynomial-pair.pdf (13 page
-s, 247488 bytes).
+Output written on steerable-near-quadrature-filter-polynomial-pair.pdf (11 page
+s, 244353 bytes).
 PDF statistics:
- 279 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 73 named destinations out of 1000 (max. 500000)
- 30809 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 278 PDF objects out of 1000 (max. 8388607)
+ 244 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 29785 words of extra memory for PDF output out of 29859 (max. 10000000)
 
